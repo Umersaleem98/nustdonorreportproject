@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DonorController;
+use App\Http\Controllers\DonorDashboardController;
 use App\Http\Controllers\StudentsDashboardController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -18,6 +19,7 @@ Route::get('register', [AdminController::class, 'sign_up']);
 Route::get('students', [StudentsDashboardController::class, 'index']);
 Route::post('students_import', [StudentsDashboardController::class, 'import']);
 
+Route::get('donor_list', [DonorDashboardController::class, 'index']);
 
 
 
