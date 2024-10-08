@@ -9,7 +9,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $table = 'students';
+    protected $table = 'studentss';
     
     protected $fillable = [
         'qalam_id', 
@@ -30,7 +30,8 @@ class Student extends Model
         'degree', 
         'year_of_admission', 
         'remarks_status', 
-        'donor_id'
+        'donor_id',
+        'images'
     ];
 
 }

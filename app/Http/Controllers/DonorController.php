@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 
 class DonorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $donors = Donor::all();
+        // Check if there is a search query
+        $search = $request->input('search');
+    
+        // Fetch donors filtered by the search query
+        $donors = Donor::when($search, function ($query, $search) {
+            return $query->where('donor_name', 'like', "%{$search}%")
+                         ->orWhere('donor_email', 'like', "%{$search}%");
+        })->get();
+    
+        // Pass the donors to the view
         return view('layouts.donor.index', compact('donors'));
     }
 

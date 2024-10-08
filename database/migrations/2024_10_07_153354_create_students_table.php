@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('father_profession')->nullable();
             $table->string('institutions')->nullable();
             $table->string('city')->nullable();
-            
-            // Change semesters to decimal with 5 total digits and 2 decimal places (e.g., 99.99)
             $table->decimal('semester_1', 5, 2)->nullable(); 
             $table->decimal('semester_2', 5, 2)->nullable();
             $table->decimal('semester_3', 5, 2)->nullable();
@@ -27,7 +25,6 @@ return new class extends Migration
             $table->decimal('semester_6', 5, 2)->nullable();
             $table->decimal('semester_7', 5, 2)->nullable();
             $table->decimal('semester_8', 5, 2)->nullable();
-            
             $table->string('program')->nullable();
             $table->string('nust_trust_fund_donor_name')->nullable();
             $table->string('degree')->nullable();
