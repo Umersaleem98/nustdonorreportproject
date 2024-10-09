@@ -17,17 +17,26 @@
             <img src="{{ asset('template/assets/logo.png') }}" alt="Logo" class="text-center" style="width: 200px; height: 100px">
             <h4 class="text-center mt-2 text-primary">DONOR REPORT</h4>
             <h6 class="reduced-line-space">
+<<<<<<< HEAD
                 Registered under Trust Act 1882, vide Registration No. 1289 & 
             </h6>
             <h6>
                 Exempted under Section 2(36) of Income Tax Ordinance, 2001
+=======
+                Registered under Trust Act 1882, vide Registration No. 1289 & Exempted under Section 2(36) of Income Tax Ordinance, 2001
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
             </h6>
         </div>
 
         <div class="container mt-5">
+<<<<<<< HEAD
             <h2 class="text-center bg-primary text-light p-2">{{ $donor->donor_name }}</h2>
             <div class="row">
                
+=======
+            <div class="row">
+                <h2 class="section-title text-center">{{ $donor->donor_name }}</h2>
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
 
                 <div class="col-md-6">
                     <div class="card mb-4">
@@ -44,7 +53,11 @@
 
         <!-- Students Section -->
         <div class="container">
+<<<<<<< HEAD
             <h2 class="my-4 text-center bg-primary text-light">Students Sponsored</h2>
+=======
+            <h2 class="my-4 text-center">Students Sponsored</h2>
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
             @if ($donor->students->isEmpty())
                 <div class="alert alert-info">No students found for this donor.</div>
             @else
@@ -53,6 +66,7 @@
                         <div class="col-lg-12 mb-4">
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body">
+<<<<<<< HEAD
                                     <div class="row">
                                         <!-- Student Photo -->
                                         <div class="col-md-4 text-center">
@@ -74,6 +88,15 @@
                                         </div>
                                     </div>
         
+=======
+                                    <h5 class="card-title font-weight-bold">{{ $student->qalam_id }}</h5>
+                                    <h5 class="card-title font-weight-bold">{{ $student->name_of_student }}</h5>
+                                    <p class="card-text"><strong>Institution:</strong> {{ $student->institutions }}</p>
+                                    <p class="card-text"><strong>City:</strong> {{ $student->city }}</p>
+                                    <p class="card-text"><strong>Father/Guardian Profession:</strong> {{ $student->father_profession }}</p>
+                                    <p class="card-text"><strong>Intake Year:</strong> {{ $student->year_of_admission }}</p>
+
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                                     <!-- CGPA Bar Chart -->
                                     <div class="col-md-8 mb-3">
                                         <canvas id="cgpaChart{{ $student->id }}"></canvas>
@@ -85,8 +108,11 @@
                 </div>
             @endif
         </div>
+<<<<<<< HEAD
     </div>
         <br><br>
+=======
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
 
 
 
@@ -126,6 +152,43 @@
         @endforeach
     </script>
     @include('layouts.footer')
+
+    <!-- JavaScript for rendering all students' charts -->
+    <script>
+        @foreach ($donor->students as $student)
+        var ctx{{ $student->id }} = document.getElementById('cgpaChart{{ $student->id }}').getContext('2d');
+        new Chart(ctx{{ $student->id }}, {
+            type: 'bar',
+            data: {
+                labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'],
+                datasets: [{
+                    label: 'CGPA',
+                    data: [
+                        {{ $student->semester_1 }},
+                        {{ $student->semester_2 }},
+                        {{ $student->semester_3 }},
+                        {{ $student->semester_4 }},
+                        {{ $student->semester_5 }},
+                        {{ $student->semester_6 }},
+                        {{ $student->semester_7 }},
+                        {{ $student->semester_8 }}
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        @endforeach
+    </script>
+
 </body>
 
 </html>

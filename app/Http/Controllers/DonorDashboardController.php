@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class DonorDashboardController extends Controller
 {
+<<<<<<< HEAD
     public function index(Request $request)
 {
     // Get the search query from the request
@@ -87,4 +88,13 @@ class DonorDashboardController extends Controller
         return redirect()->back()->with('success', 'Donor deleted successfully');
     }
 
+=======
+    public function index()
+    {
+        $perPage = 10; // You can change this number to any other value you prefer
+    
+        $donors = Donor::paginate($perPage);
+        return view('dashboard.donor.index', compact('donors'));
+    }
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
 }

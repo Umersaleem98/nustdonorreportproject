@@ -18,6 +18,7 @@ Route::get('register', [AdminController::class, 'sign_up']);
 
 Route::get('students', [StudentsDashboardController::class, 'index']);
 Route::post('students_import', [StudentsDashboardController::class, 'import']);
+<<<<<<< HEAD
 Route::get('/students_edit/{id}', [StudentsDashboardController::class, 'editstudents']);
 Route::post('/update_student/{id}', [StudentsDashboardController::class, 'updatestudent']);
 Route::get('/students_delete/{id}', [StudentsDashboardController::class, 'delete']);
@@ -26,6 +27,10 @@ Route::get('donor_list', [DonorDashboardController::class, 'index']);
 Route::get('donors_edit/{id}', [DonorDashboardController::class, 'edit']);
 Route::post('update_donor/{id}', [DonorDashboardController::class, 'update']);
 Route::get('donors_delete/{id}', [DonorDashboardController::class, 'delete']);
+=======
+
+Route::get('donor_list', [DonorDashboardController::class, 'index']);
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
 
 
 

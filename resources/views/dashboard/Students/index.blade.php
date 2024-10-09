@@ -5,12 +5,17 @@
     @include('dashboard.head')
 </head>
 
+<<<<<<< HEAD
 <body class="g-sidenav-show bg-gray-100">
+=======
+<body class="g-sidenav-show   bg-gray-100">
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
     <div id="wrapper">
 
         <!-- Sidebar -->
         @include('dashboard.sidebar')
         <!-- End of Sidebar -->
+<<<<<<< HEAD
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -35,6 +40,26 @@
                             <input type="file" class="form-control mb-3" name="file" required>
                             <button type="submit" name="submit" class="btn btn-primary">Import Students</button>
                         </form>
+=======
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('dashboard.navbar')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                     </div>
 
                     <!-- Content Row -->
@@ -58,8 +83,11 @@
                                             <th>Degree</th>
                                             <th>Year of Admission</th>
                                             <th>Remarks Status</th>
+<<<<<<< HEAD
                                             <th>Images</th>
                                             <th>Actions</th> <!-- New Actions column -->
+=======
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,6 +106,7 @@
                                                 <td>{{ $student->degree }}</td>
                                                 <td>{{ $student->year_of_admission }}</td>
                                                 <td>{{ $student->remarks_status }}</td>
+<<<<<<< HEAD
                                                 <td>
                                                     <!-- Display image if available -->
                                                     @if ($student->images)
@@ -100,6 +129,8 @@
                                                         <i class="fas fa-delete"></i> <!-- FontAwesome edit icon -->
                                                     </a>
                                                 </td>
+=======
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -125,7 +156,19 @@
     </div>
     <!-- End of Page Wrapper -->
 
+<<<<<<< HEAD
    
+=======
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+
+
+>>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
     @include('dashboard.footer')
 </body>
 
