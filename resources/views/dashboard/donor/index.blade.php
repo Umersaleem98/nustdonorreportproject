@@ -62,7 +62,7 @@
                                             <th>Id</th>
                                             <th>Donor Name</th>
                                             <th>Donor Email</th>
-                                            <th>password</th>
+                                            {{-- <th>password</th> --}}
                                             <th>Establish Year</th>
                                             <th>Amount</th>
                                             <th>No of Beneficiaries</th>
@@ -76,7 +76,7 @@
                                                 <td>{{ $donor->id }}</td>
                                                 <td>{{ $donor->donor_name }}</td>
                                                 <td>{{ $donor->donor_email }}</td>
-                                                <td>{{ $donor->password }}</td>
+                                                {{-- <td>{{ $donor->password }}</td> --}}
                                                 <td>{{ $donor->year_of_establishment }}</td>
                                                 <td>{{ $donor->amount_received }}</td>
                                                 <td>{{ $donor->number_of_beneficiaries }}</td>

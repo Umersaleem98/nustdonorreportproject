@@ -74,11 +74,17 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="donor_email">Donor password</label>
-                                        <input type="password" name="password" class="form-control"
-                                            value="{{ $donors->password }}" id="password"
-                                            placeholder="Enter Donor Email">
+                                        <label for="password">Donor Password (Enter new password if you want to update)</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter Donor Password">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="toggle-password" style="cursor:pointer;">
+                                                    <i class="fas fa-eye"></i>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
 
                                     <div class="form-group">
                                         <label for="year_of_establishment">Year of Establishment</label>
@@ -122,6 +128,25 @@
     </a>
 
     @include('dashboard.footer')
+
+    <!-- Add this script to toggle password visibility -->
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function (e) {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            // Toggle the type attribute
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
+    
 </body>
 
 </html>

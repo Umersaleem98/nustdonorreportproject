@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class DonorDashboardController extends Controller
 {
@@ -29,47 +31,44 @@ class DonorDashboardController extends Controller
 
 
 
-    public function edit($id)
-    {
-        $donors = Donor::find($id);
-        return view('dashboard.donor.edit', compact('donors'));
-    }
-
-
-    public function update(Request $request, $id)
+public function edit($id)
 {
-    // Validate the form data
-    $request->validate([
-        'donor_name' => 'required|string|max:255',
-        'fund_name' => 'required|string|max:255',
-        'donor_email' => 'required|email|max:255',
-        'password' => 'required|string|min:8|max:255', // Set proper password validation
-        'year_of_establishment' => 'required|digits:4|integer|min:1900|max:' . date('Y'), // Year should be valid and within a range
-        'amount_received' => 'required|numeric|min:0', // Ensure amount is numeric and not negative
-        'number_of_beneficiaries' => 'required|integer|min:1', // Must be a positive integer
-    ]);
+    // Retrieve the donor by their ID
+    $donors = Donor::find($id);
 
-    // Find the donor by ID
-    $donor = Donor::find($id);
-
-    if (!$donor) {
-        return redirect()->back()->with('error', 'Donor not found');
+    if (!$donors) {
+        return back()->with('error', 'Donor not found');
     }
 
-    // Update the donor's information
-    $donor->donor_name = $request->donor_name;
-    $donor->fund_name = $request->fund_name;
-    $donor->donor_email = $request->donor_email;
-    $donor->password = bcrypt($request->password); // Encrypt the password
-    $donor->year_of_establishment = $request->year_of_establishment;
-    $donor->amount_received = $request->amount_received;
-    $donor->number_of_beneficiaries = $request->number_of_beneficiaries;
+    // Return the edit view without trying to decrypt the password
+    return view('dashboard.donor.edit', compact('donors'));
+}
 
-    // Save the updated donor information
-    $donor->save();
 
-    // Redirect back with a success message
-    return redirect()->back()->with('success', 'Donor information updated successfully');
+
+public function update(Request $request, $id)
+{
+    $donors = Donor::find($id);
+
+    if (!$donors) {
+        return back()->with('error', 'Donor not found');
+    }
+
+    $donors->donor_name = $request->donor_name;
+    $donors->fund_name = $request->fund_name;
+    $donors->donor_email = $request->donor_email;
+    $donors->year_of_establishment = $request->year_of_establishment;
+    $donors->amount_received = $request->amount_received;
+    $donors->number_of_beneficiaries = $request->number_of_beneficiaries;
+
+    // Check if the password field is filled, and update it if necessary
+    if ($request->filled('password')) {
+        $donors->password = bcrypt($request->password);
+    }
+
+    $donors->save();
+
+    return redirect()->back()->with('success', 'Donor updated successfully');
 }
 
     public function delete($id)
