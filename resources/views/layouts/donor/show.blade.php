@@ -10,7 +10,7 @@
 
 <body>
 
-    @include('layouts.header')
+    @include('layouts.header')  
 
     <div class="container mb-4">
         <div class="text-center mt-4">
@@ -56,11 +56,12 @@
                                     <div class="row">
                                         <!-- Student Photo -->
                                         <div class="col-md-4 text-center">
-                                            @if($student->photo)
-                                            <img src="{{ asset('template/students_image/' . $student->photo) }}" alt="{{ $student->name_of_student }}" class="img-fluid rounded" style="max-height: 150px;">
+                                            @if($student->images) <!-- Changed from 'photo' to 'images' based on your previous code -->
+                                            <img src="{{ asset('student_images/' . $student->images) }}" alt="{{ $student->name_of_student }}" class="img-fluid rounded" style="max-height: 150px;">
                                         @else
-                                            <img src="{{ asset('template/students_image/dummy.png') }}" alt="Default Photo" class="img-fluid rounded" style="max-height: 150px;">
+                                            <img src="{{ asset('student_images/dummy.png') }}" alt="Default Photo" class="img-fluid rounded" style="max-height: 150px;">
                                         @endif
+                                        
                                         </div>
                                         <!-- Student Info -->
                                         <div class="col-md-8">
@@ -84,9 +85,10 @@
                 </div>
             @endif
         </div>
+    </div>
         <br><br>
 
-    @include('layouts.footer')
+
 
     <!-- JavaScript for rendering all students' charts -->
     <script>
@@ -123,7 +125,7 @@
         });
         @endforeach
     </script>
-
+    @include('layouts.footer')
 </body>
 
 </html>

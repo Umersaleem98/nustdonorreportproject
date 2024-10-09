@@ -1,18 +1,9 @@
- <!-- About Section -->
- <section id="about" class="about section">
-
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-       
-        <div class="col-lg-12 order-lg-1">
-          <h1 class="text-center" data-aos="fade-up">Welcome</h1>
-          <h1 class="mb-4 text-center" data-aos="fade-up">
-            Excepteur sint occaecat cupidatat non proident
-          </h1>
-          <p class="mt-5 text-center" data-aos="fade-up">
-            <a href="{{ url('donor_profile') }}" class="btn btn-get-started">Get Started</a>
-          </p>
-        </div>
-      </div>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 class="display-3 fw-bold">Donor Reports</h1>
+      <p class="lead">Here you can find detailed reports of all donor contributions and statistics.</p>
+      <a href="/donor_profile" class="btn btn-primary btn-lg mt-4">Donor Profiles</a>
     </div>
-  </section><!-- /About Section -->
+  </div>
+ </div>

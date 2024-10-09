@@ -2,28 +2,22 @@
 <html lang="en">
 
 <head>
-  @include('layouts.head')
+ @include('layouts.head')
 </head>
 
-<body id="page-top">
+<body>
 
-  @include('layouts.header')
+ @include('layouts.header')
+ 
+ @include('layouts.slider')
 
-  <main class="main">
+ 
+<br><br><br>
+<br><br><br>
+<br><br><br>
 
-   @include('layouts.slider')
+ @include('layouts.footer')
+ @include('layouts.script')
 
-
-  </main>
-
-  @include('layouts.footer')
-  <!-- Scroll Top -->
-  {{-- <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> --}}
-
-  <!-- Preloader -->
-
-
-@include('layouts.script')
 </body>
-
 </html>
