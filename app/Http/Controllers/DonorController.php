@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DonorController extends Controller
 {
@@ -21,6 +22,37 @@ class DonorController extends Controller
         // Pass the donors to the view
         return view('layouts.donor.index', compact('donors'));
     }
+
+
+    public function loginPage($id = null)
+    {
+        // Check if donor ID is provided
+        $donor = null;
+        if ($id) {
+            $donor = Donor::find($id);
+        }
+    
+        // Pass the donor data (if available) to the login view
+        return view('layouts.donor.auth', compact('donor'));
+    }
+    
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('donor_email', 'password');
+    
+        // Check if the donor exists and password is correct
+        $donor = Donor::where('donor_email', $credentials['donor_email'])->first();
+    
+        if ($donor && Hash::check($credentials['password'], $donor->password)) {
+            // If credentials match, redirect to donor's profile with a success message
+            return redirect()->route('donor_show', ['id' => $donor->id])->with('success', 'Login successful! Welcome back, ' . $donor->donor_name . '!');
+        } else {
+            // If credentials do not match, return to the login page with an error message
+            return redirect()->route('login')->with('error', 'Invalid email or password. Please try again.');
+        }
+    }
+    
 
 
     

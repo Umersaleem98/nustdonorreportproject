@@ -47,7 +47,10 @@
                     <div class="card-body d-flex flex-column align-items-center text-center">
                         <h5 class="card-title">{{ $donor->donor_name }}</h5>
                         <p class="card-text"><strong>Email:</strong> {{ $donor->donor_email }}</p>
-                        <a href="{{ url('donor_show', $donor->id) }}" class="btn btn-primary mt-2">View Donor Profile</a>
+                        <a href="{{ url('login', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">View Donor Profile</a>
+
+                        {{-- <a href="{{ url('donor_show', $donor->id) }}" class="btn btn-primary mt-2">View Donor Profile</a> --}}
+                        {{-- <a href="{{ url('/login', $donor->id) }}" class="btn btn-primary mt-2">View Donor Profile</a> --}}
                     </div>
                 </div>
             </div>

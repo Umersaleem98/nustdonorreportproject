@@ -10,7 +10,7 @@
 
 <body>
 
-    @include('layouts.header')  
+    @include('layouts.header')
 
     <div class="container mb-4">
         <div class="text-center mt-4">
