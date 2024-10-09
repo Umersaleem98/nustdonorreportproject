@@ -15,6 +15,7 @@ class Donor extends Model
         'donor_name',
         'fund_name',
         'donor_email',
+        'password',
         'year_of_establishment',
         'amount_received',
         'number_of_beneficiaries',

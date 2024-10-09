@@ -27,7 +27,6 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-<<<<<<< HEAD
                         <h1 class="h3 mb-0 text-gray-800">Donor List</h1>
 
                         <form action="{{ url('donor_list') }}" method="GET" class="form-inline">
@@ -51,9 +50,6 @@
                             {{ session('error') }}
                         </div>
                     @endif
-=======
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
->>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                     </div>
 
                     <!-- Content Row -->
@@ -66,6 +62,7 @@
                                             <th>Id</th>
                                             <th>Donor Name</th>
                                             <th>Donor Email</th>
+                                            <th>password</th>
                                             <th>Establish Year</th>
                                             <th>Amount</th>
                                             <th>No of Beneficiaries</th>
@@ -79,25 +76,18 @@
                                                 <td>{{ $donor->id }}</td>
                                                 <td>{{ $donor->donor_name }}</td>
                                                 <td>{{ $donor->donor_email }}</td>
+                                                <td>{{ $donor->password }}</td>
                                                 <td>{{ $donor->year_of_establishment }}</td>
                                                 <td>{{ $donor->amount_received }}</td>
                                                 <td>{{ $donor->number_of_beneficiaries }}</td>
                                                 <td>
                                                     <!-- Update Shortcut Button -->
-<<<<<<< HEAD
                                                     <a href="{{ url('donors_edit', $donor->id) }}" class="btn btn-sm btn-warning mb-3" title="Edit">
-=======
-                                                    <a href="{{ url('donors.edit', $donor->id) }}" class="btn btn-sm btn-warning mb-3" title="Edit">
->>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                                                         <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
                                                     </a>
                                                 </td>
                                                 <td>
-<<<<<<< HEAD
                                                     <a href="{{ url('donors_delete', $donor->id) }}" class="btn btn-sm btn-danger" title="Delete">
-=======
-                                                    <a href="{{ url('donors.edit', $donor->id) }}" class="btn btn-sm btn-danger" title="Delete">
->>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
                                                         <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
                                                     </a>
                                                 </td>

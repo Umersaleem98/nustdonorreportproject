@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class DonorDashboardController extends Controller
 {
-<<<<<<< HEAD
     public function index(Request $request)
 {
     // Get the search query from the request
@@ -38,38 +37,40 @@ class DonorDashboardController extends Controller
 
 
     public function update(Request $request, $id)
-    {
-        // Validate the form data
-        $request->validate([
-            'donor_name' => 'required|string|max:255',
-            'fund_name' => 'required|string|max:255',
-            'donor_email' => 'required|email|max:255',
-            'year_of_establishment' => 'required|numeric',
-            'amount_received' => 'required|numeric',
-            'number_of_beneficiaries' => 'required|numeric',
-        ]);
+{
+    // Validate the form data
+    $request->validate([
+        'donor_name' => 'required|string|max:255',
+        'fund_name' => 'required|string|max:255',
+        'donor_email' => 'required|email|max:255',
+        'password' => 'required|string|min:8|max:255', // Set proper password validation
+        'year_of_establishment' => 'required|digits:4|integer|min:1900|max:' . date('Y'), // Year should be valid and within a range
+        'amount_received' => 'required|numeric|min:0', // Ensure amount is numeric and not negative
+        'number_of_beneficiaries' => 'required|integer|min:1', // Must be a positive integer
+    ]);
 
-        // Find the donor by ID
-        $donors = Donor::find($id);
+    // Find the donor by ID
+    $donor = Donor::find($id);
 
-        if (!$donors) {
-            return redirect()->back()->with('error', 'Donor not found');
-        }
-
-        // Update the donor's information
-        $donors->donor_name = $request->donor_name;
-        $donors->fund_name = $request->fund_name;
-        $donors->donor_email = $request->donor_email;
-        $donors->year_of_establishment = $request->year_of_establishment;
-        $donors->amount_received = $request->amount_received;
-        $donors->number_of_beneficiaries = $request->number_of_beneficiaries;
-
-        // Save the updated donor information
-        $donors->save();
-
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Donor information updated successfully');
+    if (!$donor) {
+        return redirect()->back()->with('error', 'Donor not found');
     }
+
+    // Update the donor's information
+    $donor->donor_name = $request->donor_name;
+    $donor->fund_name = $request->fund_name;
+    $donor->donor_email = $request->donor_email;
+    $donor->password = bcrypt($request->password); // Encrypt the password
+    $donor->year_of_establishment = $request->year_of_establishment;
+    $donor->amount_received = $request->amount_received;
+    $donor->number_of_beneficiaries = $request->number_of_beneficiaries;
+
+    // Save the updated donor information
+    $donor->save();
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Donor information updated successfully');
+}
 
     public function delete($id)
     {
@@ -88,13 +89,4 @@ class DonorDashboardController extends Controller
         return redirect()->back()->with('success', 'Donor deleted successfully');
     }
 
-=======
-    public function index()
-    {
-        $perPage = 10; // You can change this number to any other value you prefer
-    
-        $donors = Donor::paginate($perPage);
-        return view('dashboard.donor.index', compact('donors'));
-    }
->>>>>>> 16e7b67daf41c455376adb2b8c94c1fd4e3932be
 }

@@ -72,6 +72,13 @@
                                             value="{{ $donors->donor_email }}" id="donor_email"
                                             placeholder="Enter Donor Email">
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="donor_email">Donor password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            value="{{ $donors->password }}" id="password"
+                                            placeholder="Enter Donor Email">
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="year_of_establishment">Year of Establishment</label>
