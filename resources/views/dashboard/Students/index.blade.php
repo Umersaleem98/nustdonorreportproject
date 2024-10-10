@@ -29,17 +29,24 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                     </div>
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <form action="{{ url('students_import') }}" method="POST" enctype="multipart/form-data">
+
+                    <!-- Import Students Form -->
+                    <div class="d-flex justify-content-between mb-4">
+                        <form action="{{ url('students_import') }}" method="POST" enctype="multipart/form-data" class="mr-2">
                             @csrf
                             <input type="file" class="form-control mb-3" name="file" required>
                             <button type="submit" name="submit" class="btn btn-primary">Import Students</button>
+                        </form>
+
+                        <!-- Search Form -->
+                        <form action="{{ url('students') }}" method="GET" class="d-flex">
+                            <input type="text" class="form-control mr-2" name="search" placeholder="Search by Name or Qalam ID" required>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <div class="col-md-12">
                             <div style="overflow-x:auto;">
                                 <table class="table table-striped table-bordered table-hover">
@@ -59,7 +66,7 @@
                                             <th>Year of Admission</th>
                                             <th>Remarks Status</th>
                                             <th>Images</th>
-                                            <th>Actions</th> <!-- New Actions column -->
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,7 +86,6 @@
                                                 <td>{{ $student->year_of_admission }}</td>
                                                 <td>{{ $student->remarks_status }}</td>
                                                 <td>
-                                                    <!-- Display image if available -->
                                                     @if ($student->images)
                                                         <img src="{{ asset('student_images/' . $student->images) }}"
                                                             alt="Student Image"
@@ -88,44 +94,37 @@
                                                         No Image Available
                                                     @endif
                                                 </td>
-                                                
                                                 <td>
-                                                    <!-- Edit button -->
                                                     <a href="{{ url('students_edit', $student->id) }}" class="btn btn-sm btn-warning" title="Edit">
-                                                        <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
+                                                        <i class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('students_delete', $student->id) }}" class="btn btn-sm btn-danger" title="Edit">
-                                                        <i class="fas fa-delete"></i> <!-- FontAwesome edit icon -->
+                                                    <a href="{{ url('students_delete', $student->id) }}" class="btn btn-sm btn-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
+
                             <!-- Pagination Links -->
                             <div class="d-flex justify-content-center">
                                 {{ $students->links() }}
                             </div>
                             <!-- Pagination Links -->
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
 
-   
     @include('dashboard.footer')
 </body>
 

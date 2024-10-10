@@ -10,18 +10,33 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentsDashboardController extends Controller
 {
-    public function index()
-    {
-        // Set the number of students to display per page
-        $perPage = 10; // You can change this number to any other value you prefer
-    
-        // Fetch paginated students from the database
-        $students = Student::paginate($perPage);
-    
-        // Return the view with the students data
-        return view('dashboard.Students.index', compact('students'));
+    public function index(Request $request)
+{
+    // Set the number of students to display per page
+    $perPage = 10; // You can change this number to any other value you prefer
+
+    // Initialize the query for students
+    $query = Student::query();
+
+    // Check if a search term is provided
+    if ($request->has('search') && $request->input('search') != '') {
+        $search = $request->input('search');
+        
+        // Modify the query to filter based on the search term
+        $query->where(function($q) use ($search) {
+            $q->where('name_of_student', 'LIKE', "%$search%")
+              ->orWhere('qalam_id', 'LIKE', "%$search%");
+        });
     }
-    
+
+    // Fetch paginated students from the database
+    $students = $query->paginate($perPage);
+
+    // Return the view with the students data
+    return view('dashboard.Students.index', compact('students'));
+}
+
+
     public function import(Request $request)
     {
         // Validate the request

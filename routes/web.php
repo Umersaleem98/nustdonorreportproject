@@ -22,6 +22,9 @@ Route::get('register', [AdminController::class, 'sign_up']);
 
 Route::get('students', [StudentsDashboardController::class, 'index']);
 Route::post('students_import', [StudentsDashboardController::class, 'import']);
+
+
+
 Route::get('/students_edit/{id}', [StudentsDashboardController::class, 'editstudents']);
 Route::post('/update_student/{id}', [StudentsDashboardController::class, 'updatestudent']);
 Route::get('/students_delete/{id}', [StudentsDashboardController::class, 'delete']);
