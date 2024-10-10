@@ -44,7 +44,7 @@
 
         <!-- Students Section -->
         <div class="container">
-            <h2 class="my-4 text-center bg-primary text-light">Students Sponsored</h2>
+            <h2 class="my-4 text-center bg-primary text-light p-2">Students Sponsored</h2>
             @if ($donor->students->isEmpty())
                 <div class="alert alert-info">No students found for this donor.</div>
             @else
@@ -65,8 +65,8 @@
                                         </div>
                                         <!-- Student Info -->
                                         <div class="col-md-8">
-                                            <h5 class="card-title font-weight-bold">{{ $student->qalam_id }}</h5>
-                                            <h5 class="card-title font-weight-bold">{{ $student->name_of_student }}</h5>
+                                            <p class="card-text"><strong>Qalam Id:</strong> {{ $student->qalam_id }}</p>
+                                            <p class="card-text"><strong>Student Name:</strong> {{ $student->name_of_student }}</p>
                                             <p class="card-text"><strong>Institution:</strong> {{ $student->institutions }}</p>
                                             <p class="card-text"><strong>City:</strong> {{ $student->city }}</p>
                                             <p class="card-text"><strong>Father/Guardian Profession:</strong> {{ $student->father_profession }}</p>

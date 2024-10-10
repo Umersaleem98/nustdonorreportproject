@@ -36,7 +36,6 @@
     </div>
     
     
-
     <div class="container">
         <div class="row">
             <!-- Loop through donors data if available -->
@@ -45,12 +44,20 @@
                 <!-- Bootstrap Card for Donor -->
                 <div class="card">
                     <div class="card-body d-flex flex-column align-items-center text-center">
-                        <h5 class="card-title">{{ $donor->donor_name }}</h5>
-                        <p class="card-text"><strong>Email:</strong> {{ $donor->donor_email }}</p>
-                        <a href="{{ url('login', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">View Donor Profile</a>
-
-                        {{-- <a href="{{ url('donor_show', $donor->id) }}" class="btn btn-primary mt-2">View Donor Profile</a> --}}
-                        {{-- <a href="{{ url('/login', $donor->id) }}" class="btn btn-primary mt-2">View Donor Profile</a> --}}
+                        <!-- Donor Name with Font Awesome Icon -->
+                        <h6 class="card-title">
+                            <i class="fas fa-user"></i> {{ $donor->donor_name }}
+                        </h6>
+                        
+                        <!-- Donor Email with Font Awesome Icon -->
+                        {{-- <p class="card-text">
+                            <i class="fas fa-envelope"></i> <strong>Email:</strong> {{ $donor->donor_email }}
+                        </p>
+                         --}}
+                        <!-- Donor Profile Button -->
+                        <a href="{{ url('login', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">
+                            <i class="fas fa-user-circle"></i> View Donor Profile
+                        </a>
                     </div>
                 </div>
             </div>
