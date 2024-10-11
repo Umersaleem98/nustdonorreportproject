@@ -39,9 +39,9 @@
                         </form>
 
                         <!-- Search Form -->
-                        <form action="{{ url('students') }}" method="GET" class="d-flex">
-                            <input type="text" class="form-control mr-2" name="search" placeholder="Search by Name or Qalam ID" required>
-                            <button type="submit" class="btn btn-primary">Search</button>
+                        <form action="{{ url('students') }}" method="GET" >
+                            <input type="text" class="form-control mr-2 mb-3" name="search" placeholder="Search by Name or Qalam ID" required>
+                            <button type="submit" class="btn btn-primary ">Search</button>
                         </form>
                     </div>
 
