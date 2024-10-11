@@ -24,16 +24,16 @@ class DonorController extends Controller
     }
 
 
-    public function loginPage($id = null)
+    public function loginPage()
     {
-        // Check if donor ID is provided
-        $donor = null;
-        if ($id) {
-            $donor = Donor::find($id);
-        }
+        // // Check if donor ID is provided
+        // $donor = null;
+        // if ($id) {
+        //     $donor = Donor::find($id);
+        // }
     
         // Pass the donor data (if available) to the login view
-        return view('layouts.donor.auth', compact('donor'));
+        return view('layouts.donor.auth');
     }
     
 
