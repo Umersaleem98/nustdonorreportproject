@@ -33,7 +33,18 @@
     </li>
     
     <li class="nav-item active">
+        <a class="nav-link" href="{{ url('add_students') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Add New Students</span></a>
+    </li>
+    
+    <li class="nav-item active">
         <a class="nav-link" href="{{ url('donor_list') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Donor List</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('adddonor') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Donor List</span></a>
     </li>

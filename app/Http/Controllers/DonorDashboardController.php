@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -29,6 +30,47 @@ class DonorDashboardController extends Controller
     return view('dashboard.donor.index', compact('donors'));
 }
 
+
+    public function donor_form()
+    {
+        return view('dashboard.donor.add_donors');
+    }
+
+
+
+    public function adddonors(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'donor_name' => 'required|string|max:255',
+            'fund_name' => 'required|string|max:255',
+            'donor_email' => 'required|email|max:255|unique:donors,donor_email', // Unique email
+            'password' => 'required|string|min:8', // Password validation
+            'year_of_establishment' => 'required|integer',
+            'amount_received' => 'required|regex:/^\d+(\.\d{1,2})?$/', // Decimal validation
+            'number_of_beneficiaries' => 'required|integer',
+        ]);
+    
+        try {
+            // Attempt to create a new donor
+            Donor::create([
+                'donor_name' => $request->donor_name,
+                'fund_name' => $request->fund_name,
+                'donor_email' => $request->donor_email,
+                'password' => bcrypt($request->password), // Hash the password
+                'year_of_establishment' => $request->year_of_establishment,
+                'amount_received' => $request->amount_received,
+                'number_of_beneficiaries' => $request->number_of_beneficiaries,
+            ]);
+    
+            // Redirect with success message
+            return redirect()->back()->with('success', 'Donor information added successfully');
+        } catch (Exception $e) {
+            // Catch any errors and redirect back with an error message
+            return redirect()->back()->with('error', 'Failed to add donor: ' . $e->getMessage());
+        }
+    }
+    
 
 
 public function edit($id)

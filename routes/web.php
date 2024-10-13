@@ -25,10 +25,15 @@ Route::post('students_import', [StudentsDashboardController::class, 'import']);
 
 
 
+Route::get('add_students', [StudentsDashboardController::class, 'student_form']);
+Route::post('addstudents', [StudentsDashboardController::class, 'addStudent']);
 Route::get('/students_edit/{id}', [StudentsDashboardController::class, 'editstudents']);
 Route::post('/update_student/{id}', [StudentsDashboardController::class, 'updatestudent']);
 Route::get('/students_delete/{id}', [StudentsDashboardController::class, 'delete']);
 
+
+Route::get('adddonor', [DonorDashboardController::class, 'donor_form']);
+Route::post('add_donor', [DonorDashboardController::class, 'adddonors']);
 Route::get('donor_list', [DonorDashboardController::class, 'index']);
 Route::get('donors_edit/{id}', [DonorDashboardController::class, 'edit']);
 Route::post('update_donor/{id}', [DonorDashboardController::class, 'update']);

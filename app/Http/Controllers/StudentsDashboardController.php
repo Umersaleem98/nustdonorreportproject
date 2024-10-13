@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donor;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Imports\StudentsImport;
@@ -49,6 +50,79 @@ class StudentsDashboardController extends Controller
 
         return back()->with('success', 'Students Imported Successfully!');
     }
+
+
+    public function student_form()
+    {
+        $donors = Donor::all();
+        return view('dashboard.Students.addstudents', compact('donors'));
+    }
+
+
+    public function addStudent(Request $request)
+{
+    // Validate the incoming request data
+    $request->validate([
+        'qalam_id' => 'required|string|max:255|unique:students,qalam_id', // Unique Qalam ID
+        'name_of_student' => 'required|string|max:255',
+        'father_profession' => 'required|string|max:255',
+        'institutions' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'program' => 'required|string|max:255',
+        'nust_trust_fund_donor_name' => 'required|string|max:255',
+        'degree' => 'required|string|max:255',
+        'year_of_admission' => 'required|integer',
+        'remarks_status' => 'required|string|max:255',
+        'donor_id' => 'required|integer',
+        'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
+    ]);
+
+    // Create a new Student instance
+    $student = new Student();
+
+    // Assign form data to the student object
+    $student->qalam_id = $request->qalam_id;
+    $student->name_of_student = $request->name_of_student;
+    $student->father_profession = $request->father_profession;
+    $student->institutions = $request->institutions;
+    $student->city = $request->city;
+    $student->semester_1 = $request->semester_1;
+    $student->semester_2 = $request->semester_2;
+    $student->semester_3 = $request->semester_3;
+    $student->semester_4 = $request->semester_4;
+    $student->semester_5 = $request->semester_5;
+    $student->semester_6 = $request->semester_6;
+    $student->semester_7 = $request->semester_7;
+    $student->semester_8 = $request->semester_8;
+    $student->program = $request->program;
+    $student->nust_trust_fund_donor_name = $request->nust_trust_fund_donor_name;
+    $student->degree = $request->degree;
+    $student->year_of_admission = $request->year_of_admission;
+    $student->remarks_status = $request->remarks_status;
+    $student->donor_id = $request->donor_id;
+
+    // Handle image upload if present
+    if ($request->hasFile('images')) {
+        // Process and move the uploaded image
+        $file = $request->file('images');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('student_images'), $fileName);
+
+        // Assign the image file name to the student object
+        $student->images = $fileName;
+    }
+
+    // Save the new student data into the database
+    $student->save();
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Student added successfully');
+}
+
+
+
+
+
 
     public function editstudents($id)
     {
