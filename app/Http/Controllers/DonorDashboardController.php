@@ -19,6 +19,7 @@ class DonorDashboardController extends Controller
     if ($search) {
         $donors = Donor::where('donor_name', 'LIKE', "%{$search}%")
                     ->orWhere('donor_email', 'LIKE', "%{$search}%")
+                    ->orWhere('fund_name', 'LIKE', "%{$search}%")
                     ->orWhere('year_of_establishment', 'LIKE', "%{$search}%")
                     ->paginate(10);
     } else {

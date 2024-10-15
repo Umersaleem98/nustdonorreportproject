@@ -26,6 +26,7 @@ class StudentsDashboardController extends Controller
         // Modify the query to filter based on the search term
         $query->where(function($q) use ($search) {
             $q->where('name_of_student', 'LIKE', "%$search%")
+              ->orWhere('nust_trust_fund_donor_name', 'LIKE', "%$search%")
               ->orWhere('qalam_id', 'LIKE', "%$search%");
         });
     }
