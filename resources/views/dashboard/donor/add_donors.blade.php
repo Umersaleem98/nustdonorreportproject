@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Add Donors</title>
     @include('dashboard.head')
 </head>
 

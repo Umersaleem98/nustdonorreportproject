@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Add Student</title>
     @include('dashboard.head')
 </head>
 

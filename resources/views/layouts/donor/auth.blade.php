@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Donor Profile</title>
+    <title>Donor login</title>
     @include('layouts.head')
 </head>
 <body>

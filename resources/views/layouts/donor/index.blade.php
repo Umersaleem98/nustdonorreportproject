@@ -55,7 +55,7 @@
                         </p>
                          --}}
                         <!-- Donor Profile Button -->
-                        <a href="{{ url('login', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">
+                        <a href="{{ url('donorlogin', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">
                             <i class="fas fa-user-circle"></i> View Donor Profile
                         </a>
                     </div>
