@@ -47,6 +47,7 @@
                         <!-- Donor Name with Font Awesome Icon -->
                         <h6 class="card-title">
                             <i class="fas fa-user"></i> {{ $donor->donor_name }}
+                            <i class="fas fa-user"></i> {{ $donor->donor_email }}
                         </h6>
                         
                         <!-- Donor Email with Font Awesome Icon -->

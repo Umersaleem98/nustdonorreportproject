@@ -14,7 +14,7 @@ class StudentsDashboardController extends Controller
     public function index(Request $request)
 {
     // Set the number of students to display per page
-    $perPage = 10; // You can change this number to any other value you prefer
+    $perPage = 15; // You can change this number to any other value you prefer
 
     // Initialize the query for students
     $query = Student::query();
