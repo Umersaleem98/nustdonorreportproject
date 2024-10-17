@@ -51,7 +51,7 @@
           <div class="container">
               <div class="row">
                   <div class="col-md-12 text-center">
-                      <h1 class="display-3 fw-bold text-light">Donor Reports</h1>
+                      <h1 class="display-3 fw-bold text-light mt-5">Donor Reports</h1>
                       <p class="lead text-light">Here you can find detailed reports of all donor contributions and statistics.</p>
                       <p class="h4  text-light mt-3">Your Generosity Changes Lives: Join Us in Making a Difference!</p>
                       {{-- <a href="/donor_profile" class="btn btn-primary btn-lg mt-4">Donor Profiles</a> --}}
@@ -64,8 +64,8 @@
       <div class="carousel-item">
           <div class="container">
               <div class="row">
-                  <div class="col-md-12 text-center">
-                      <h1 class="display-3 fw-bold text-light">Contribute Now</h1>
+                  <div class="col-md-12 text-center mb-5">
+                      <h1 class="display-3 fw-bold text-light mt-5">Contribute Now</h1>
                       <p class="lead text-light">Become a part of something bigger by contributing to our ongoing projects.</p>
                       <p class="h4 text-light mt-3">Your Support Empowers Students and Drives Innovation.</p>
                       {{-- <a href="/contribute" class="btn btn-success btn-lg mt-4">Contribute Today</a> --}}
