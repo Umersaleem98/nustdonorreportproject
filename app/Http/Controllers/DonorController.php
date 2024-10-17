@@ -10,18 +10,19 @@ class DonorController extends Controller
 {
     public function index(Request $request)
     {
-        // Check if there is a search query
-        $search = $request->input('search');
+        // Fetch the search query
+        $query = $request->input('search');
     
-        // Fetch donors filtered by the search query
-        $donors = Donor::when($search, function ($query, $search) {
-            return $query->where('donor_name', 'like', "%{$search}%")
-                         ->orWhere('donor_email', 'like', "%{$search}%");
+        // Fetch donors based on the search query
+        $donors = Donor::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('donor_name', 'like', "%{$query}%")
+                                ->orWhere('donor_email', 'like', "%{$query}%");
         })->get();
     
-        // Pass the donors to the view
-        return view('layouts.donor.index', compact('donors'));
+        // Pass the donors and the query to the view
+        return view('layouts.donor.index', compact('donors', 'query'));
     }
+    
 
 
     public function loginPage()

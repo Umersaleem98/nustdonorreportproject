@@ -33,9 +33,9 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{ $donor->fund_name }}</h5>
-                            <p class="card-text"><strong>Year of Establishment:</strong> {{ $donor->year_of_establishment }}</p>
-                            <p class="card-text"><strong>Amount Received:</strong> {{ number_format($donor->amount_received, 2) }} PKR</p>
-                            <p class="card-text"><strong>Number of Beneficiaries:</strong> {{ $donor->number_of_beneficiaries }}</p>
+                            <h5 class="card-text"><strong>Year of Establishment:</strong> {{ $donor->year_of_establishment }}</h5>
+                            <h5 class="card-text"><strong>Amount Received:</strong> {{ number_format($donor->amount_received, 2) }} PKR</h5>
+                            <h5 class="card-text"><strong>Number of Beneficiaries:</strong> {{ $donor->number_of_beneficiaries }}</h5>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                         <!-- Student Photo -->
                                         <div class="col-md-4 text-center">
                                             @if($student->images) <!-- Changed from 'photo' to 'images' based on your previous code -->
-                                            <img src="{{ asset('student_images/' . $student->images) }}" alt="{{ $student->name_of_student }}" class="img-fluid rounded" style="max-height: 150px;">
+                                            <img src="{{ asset('student_images/' . $student->images) }}" alt="{{ $student->name_of_student }}" class="img-fluid rounded" style="width: 300px; height: 200px;">
                                         @else
                                             <img src="{{ asset('student_images/dummy.png') }}" alt="Default Photo" class="img-fluid rounded" style="max-height: 150px;">
                                         @endif
@@ -65,18 +65,19 @@
                                         </div>
                                         <!-- Student Info -->
                                         <div class="col-md-8">
-                                            <p class="card-text"><strong>Qalam Id:</strong> {{ $student->qalam_id }}</p>
-                                            <p class="card-text"><strong>Student Name:</strong> {{ $student->name_of_student }}</p>
-                                            <p class="card-text"><strong>Institution:</strong> {{ $student->institutions }}</p>
-                                            <p class="card-text"><strong>City:</strong> {{ $student->city }}</p>
-                                            <p class="card-text"><strong>Father/Guardian Profession:</strong> {{ $student->father_profession }}</p>
-                                            <p class="card-text"><strong>Intake Year:</strong> {{ $student->year_of_admission }}</p>
+                                            <h5 class="card-text"><strong>Qalam Id:</strong> {{ $student->qalam_id }}</h5>
+                                            <h5 class="card-text"><strong>Student Name:</strong> {{ $student->name_of_student }}</h5>
+                                            <h5 class="card-text"><strong>Institution:</strong> {{ $student->institutions }}</h5>
+                                            <h5 class="card-text"><strong>City:</strong> {{ $student->city }}</h5>
+                                            <h5 class="card-text"><strong>Father/Guardian Profession:</strong> {{ $student->father_profession }}</h5>
+                                            <h5 class="card-text"><strong>Intake Year:</strong> {{ $student->year_of_admission }}</h5>
                                         </div>
                                     </div>
         
                                     <!-- CGPA Bar Chart -->
-                                    <div class="col-md-8 mb-3">
-                                        <canvas id="cgpaChart{{ $student->id }}"></canvas>
+                                    <div class="col-md-6 mb-3">
+                                        {{-- <canvas id="cgpaChart{{ $student->id }}"></canvas> --}}
+                                        <canvas id="cgpaChart{{ $student->id }}" style="width: 100%; height: 250px;"></canvas>
                                     </div>
                                 </div>
                             </div>

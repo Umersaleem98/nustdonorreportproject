@@ -3,31 +3,30 @@
 <head>
     <title>Donor Profile</title>
     @include('layouts.head')
+    <style>
+        .green-border {
+        border: 2px solid green;
+    }
+    </style>
 </head>
 <body>
     @include('layouts.header')
+    @include('layouts.slider')
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center mb-4 mt-3">Donor Profiles</h1>
-            </div>
-        </div>
-    </div>
-
-    <<div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <form action="{{ url('donor_profile') }}" method="GET" class="mb-4">
-                    <div class="form-row align-items-center">
-                        <div class="col-md-6">
-                            <input type="text" name="search" id="search" placeholder="Search Donor" class="form-control mb-2" value="{{ request('search') }}">
+    <!-- Centered Search Form -->
+    <div class="container center-search-form">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form action="{{ url('/') }}" method="GET" class="mb-4 text-center">
+                    <div class="form-row justify-content-center">
+                        <div class="col-md-12 mb-2">
+                            <input type="text" name="search" id="search" placeholder="Search Donor" class="form-control mb-3" value="{{ request('search') }}" style="border: 2px solid green;">
+                            <input type="submit" name="submit" class="btn btn-primary  mb-2" value="Search">
                         </div>
-                        <div class="col-md-3">
-                            <input type="submit" name="submit" class="btn btn-primary w-100 mb-2" value="Search">
-                        </div>
-                        <div class="col-md-3">
-                            <a href="{{ url('donor_profile') }}" class="btn btn-success w-100 mb-2">Reset</a>
+                    </div>
+                    <div class="form-row justify-content-center">
+                        <div class="col-md-3 d-flex justify-content-center">
+                            {{-- <input type="submit" name="submit" class="btn btn-primary w-100 mb-2" value="Search"> --}}
                         </div>
                     </div>
                 </form> 
@@ -35,37 +34,40 @@
         </div>
     </div>
     
-    
-    <div class="container">
-        <div class="row">
-            <!-- Loop through donors data if available -->
-            @foreach($donors as $donor)
-            <div class="col-md-4 mb-4">
-                <!-- Bootstrap Card for Donor -->
-                <div class="card">
-                    <div class="card-body d-flex flex-column align-items-center text-center">
-                        <!-- Donor Name with Font Awesome Icon -->
-                        <h6 class="card-title">
-                            <i class="fas fa-user"></i> {{ $donor->donor_name }}
-                            <i class="fas fa-user"></i> {{ $donor->donor_email }}
-                        </h6>
-                        
-                        <!-- Donor Email with Font Awesome Icon -->
-                        {{-- <p class="card-text">
-                            <i class="fas fa-envelope"></i> <strong>Email:</strong> {{ $donor->donor_email }}
-                        </p>
-                         --}}
-                        <!-- Donor Profile Button -->
-                        <a href="{{ url('donorlogin', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">
-                            <i class="fas fa-user-circle"></i> View Donor Profile
-                        </a>
+
+    @if($query)
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Show message if no donors are found -->
+                @if($donors->isEmpty())
+                    <div class="col-md-12 text-center">
+                        <p>No donors found matching your search.</p>
                     </div>
-                </div>
+                @else
+                    <!-- Loop through donors data if available -->
+                    @foreach($donors as $donor)
+                    <div class="col-md-4 mb-4">
+                        <!-- Bootstrap Card for Donor -->
+                        <div class="card">
+                            <div class="card-body d-flex flex-column align-items-center text-center">
+                                <!-- Donor Name with Font Awesome Icon -->
+                                <h6 class="card-title">
+                                    <i class="fas fa-user"></i> {{ $donor->donor_name }}
+                                    <i class="fas fa-envelope"></i> {{ $donor->donor_email }}
+                                </h6>
+
+                                <!-- Donor Profile Button -->
+                                <a href="{{ url('donorlogin', ['id' => $donor->id]) }}" class="btn btn-primary mt-2">
+                                    <i class="fas fa-user-circle"></i> View Donor Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @endif
             </div>
-            @endforeach
         </div>
-    </div>
-    
+    @endif
 
     @include('layouts.footer')
 </body>

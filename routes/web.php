@@ -8,9 +8,10 @@ use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonorDashboardController;
 use App\Http\Controllers\StudentsDashboardController;
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/donor_profile', [DonorController::class, 'index']);
+Route::get('/', [DonorController::class, 'index']);
+// Route::get('/donor_profile', [DonorController::class, 'index']);
 Route::get('/donorlogin/{id?}', [DonorController::class, 'loginPage'])->name('login');
 Route::post('/login_submit', [DonorController::class, 'authenticate']);
 Route::get('/donor_show/{id}', [DonorController::class, 'show'])->name('donor_show');
