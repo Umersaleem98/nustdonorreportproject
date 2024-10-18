@@ -34,6 +34,12 @@
       background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
       z-index: 1; /* Below text but above the background */
   }
+
+  .btn-info {
+    width: 300px;
+      padding: 15px 30px; /* Adjust padding for width and height */
+      font-size: 1.5rem;   /* Increase the font size */
+  }
 </style>
 
 <!-- Bootstrap Carousel -->
@@ -52,8 +58,10 @@
               <div class="row">
                   <div class="col-md-12 text-center">
                       <h1 class="display-3 fw-bold text-light mt-5">Donor Reports</h1>
-                      <p class="lead text-light">Here you can find detailed reports of all donor contributions and statistics.</p>
+                      {{-- <p class="lead text-light">Here you can find detailed reports of all donor contributions and statistics.</p> --}}
                       <p class="h4  text-light mt-3">Your Generosity Changes Lives: Join Us in Making a Difference!</p>
+                      <p class="h4  text-light mt-3">Your Generosity Changes Lives: Join Us in Making a Difference!</p>
+                      <a href="{{ url('donorlogin') }}" class="btn btn-info">Login</a>
                       {{-- <a href="/donor_profile" class="btn btn-primary btn-lg mt-4">Donor Profiles</a> --}}
                   </div>
               </div>
@@ -66,8 +74,11 @@
               <div class="row">
                   <div class="col-md-12 text-center mb-5">
                       <h1 class="display-3 fw-bold text-light mt-5">Contribute Now</h1>
-                      <p class="lead text-light">Become a part of something bigger by contributing to our ongoing projects.</p>
+                      {{-- <p class="lead text-light">Become a part of something bigger by contributing to our ongoing projects.</p> --}}
                       <p class="h4 text-light mt-3">Your Support Empowers Students and Drives Innovation.</p>
+                      <p class="h4 text-light mt-3">Your Support Empowers Students and Drives Innovation.</p>
+                      <a href="{{ url('donorlogin') }}" class="btn btn-info">Login</a>
+
                       {{-- <a href="/contribute" class="btn btn-success btn-lg mt-4">Contribute Today</a> --}}
                   </div>
               </div>

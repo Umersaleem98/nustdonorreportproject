@@ -31,6 +31,7 @@ class Student extends Model
         'year_of_admission', 
         'remarks_status', 
         'donor_id',
+        'student_status',
         'images'
     ];
 

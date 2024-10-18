@@ -33,15 +33,17 @@
 
                     <!-- Import Students Form -->
                     <div class="d-flex justify-content-between mb-4">
-                        <form action="{{ url('students_import') }}" method="POST" enctype="multipart/form-data" class="mr-2">
+                        <form action="{{ url('students_import') }}" method="POST" enctype="multipart/form-data"
+                            class="mr-2">
                             @csrf
                             <input type="file" class="form-control mb-3" name="file" required>
                             <button type="submit" name="submit" class="btn btn-primary">Import Students</button>
                         </form>
 
                         <!-- Search Form -->
-                        <form action="{{ url('students') }}" method="GET" >
-                            <input type="text" class="form-control mr-2 mb-3" name="search" placeholder="Search by Name or Qalam ID" required>
+                        <form action="{{ url('students') }}" method="GET">
+                            <input type="text" class="form-control mr-2 mb-3" name="search"
+                                placeholder="Search by Name or Qalam ID" required>
                             <button type="submit" class="btn btn-primary ">Search</button>
                         </form>
                     </div>
@@ -92,16 +94,21 @@
                                                             alt="Student Image"
                                                             style="max-width: 80px; max-height: 80px;">
                                                     @else
-                                                        No Image Available
+                                                        <img src="{{ asset('student_images/abc/dummy.png') }}"
+                                                            alt="Default Photo"
+                                                            class="img-fluid rounded-circle border border-secondary"
+                                                            style="width: 200px; height: 200px;">
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('students_edit', $student->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                                                    <a href="{{ url('students_edit', $student->id) }}"
+                                                        class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('students_delete', $student->id) }}" class="btn btn-sm btn-danger" title="Delete">
+                                                    <a href="{{ url('students_delete', $student->id) }}"
+                                                        class="btn btn-sm btn-danger" title="Delete">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
