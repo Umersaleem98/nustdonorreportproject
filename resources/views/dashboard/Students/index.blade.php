@@ -69,7 +69,11 @@
                                             <th>Year of Admission</th>
                                             <th>Remarks Status</th>
                                             <th>Images</th>
-                                            <th>Actions</th>
+                                            @if (Auth::user()->usertype != 'user')
+                                                <!-- Check if usertype is not 'user' -->
+                                                <th>Actions</th>
+                                            @endif
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,39 +105,36 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('students_edit', $student->id) }}"
-                                                        class="btn btn-sm btn-warning" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
+                                                    @if (Auth::user()->usertype != 'user')
+                                                        <!-- Check if usertype is not 'user' -->
+                                                        <a href="{{ url('students_edit', $student->id) }}"
+                                                            class="btn btn-sm btn-warning" title="Edit">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('students_delete', $student->id) }}"
-                                                        class="btn btn-sm btn-danger" title="Delete">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+
+                                                    @if (Auth::user()->usertype != 'user')
+                                                        <!-- Check if usertype is not 'user' -->
+                                                        <a href="{{ url('students_delete', $student->id) }}"
+                                                            class="btn btn-sm btn-danger" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
-                            <!-- Pagination Links -->
-                            <div class="d-flex justify-content-center">
-                                {{ $students->links() }}
+                            <div class="d-flex justify-content-center mt-4">
+                                <!-- Bootstrap Pagination -->
+                                {{ $students->appends(request()->query())->links('pagination::bootstrap-4') }}
                             </div>
-                            <!-- Pagination Links -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
-
-    @include('dashboard.footer')
 </body>
 
 </html>

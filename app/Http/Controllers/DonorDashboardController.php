@@ -11,25 +11,27 @@ use Illuminate\Contracts\Encryption\DecryptException;
 class DonorDashboardController extends Controller
 {
     public function index(Request $request)
-{
-    // Get the search query from the request
-    $search = $request->query('search');
-
-    // If there's a search query, filter the donors, otherwise return all
-    if ($search) {
-        $donors = Donor::where('donor_name', 'LIKE', "%{$search}%")
-                    ->orWhere('donor_email', 'LIKE', "%{$search}%")
-                    ->orWhere('fund_name', 'LIKE', "%{$search}%")
-                    ->orWhere('year_of_establishment', 'LIKE', "%{$search}%")
-                    ->paginate(10);
-    } else {
-        // Return all donors if no search query is present
-        $donors = Donor::paginate(10);
+    {
+        // Get the search query from the request
+        $search = $request->query('search');
+    
+        // Check if there's a search query
+        if ($search) {
+            // Filter the donors based on the search query
+            $donors = Donor::where('donor_name', 'LIKE', "%{$search}%")
+                        ->orWhere('donor_email', 'LIKE', "%{$search}%")
+                        ->orWhere('fund_name', 'LIKE', "%{$search}%")
+                        ->orWhere('year_of_establishment', 'LIKE', "%{$search}%")
+                        ->paginate(10);
+        } else {
+            // Get all donors if no search query is present
+            $donors = Donor::paginate(10);
+        }
+    
+        // Pass the search term back to the view for displaying in the search input
+        return view('dashboard.donor.index', compact('donors', 'search'));
     }
-
-    // Return the view with the donors data
-    return view('dashboard.donor.index', compact('donors'));
-}
+    
 
 
     public function donor_form()

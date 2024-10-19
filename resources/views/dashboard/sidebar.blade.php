@@ -12,7 +12,8 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('/admin') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i> <!-- Dashboard Icon -->
-            <span>Dashboard</span></a>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Divider -->
@@ -27,32 +28,42 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('students') }}">
             <i class="fas fa-user-graduate"></i> <!-- Students Icon -->
-            <span>Students</span></a>
+            <span>Students</span>
+        </a>
     </li>
     
-    <!-- Nav Item - Add New Students -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('add_students') }}">
-            <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
-            <span>Add New Students</span></a>
-    </li>
+    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+        <!-- Nav Item - Add New Students -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url('add_students') }}">
+                <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
+                <span>Add New Students</span>
+            </a>
+        </li>
     
+    
+    @endif
+
     <!-- Nav Item - Donor List -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('donor_list') }}">
             <i class="fas fa-hand-holding-usd"></i> <!-- Donor List Icon -->
-            <span>Donor List</span></a>
-    </li>
-    
-    <!-- Nav Item - Add Donor -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('adddonor') }}">
-            <i class="fas fa-user-tie"></i> <!-- Add Donor Icon -->
-            <span>Add Donor</span></a>
+            <span>Donor List</span>
+        </a>
     </li>
 
+
+    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+        <!-- Nav Item - Add New Students -->
+        <!-- Nav Item - Add Donor -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url('adddonor') }}">
+                <i class="fas fa-user-tie"></i> <!-- Add Donor Icon -->
+                <span>Add Donor</span>
+            </a>
+        </li>
+    @endif
     <!-- Divider -->
     <hr class="sidebar-divider">
 
 </ul>
-    

@@ -4,6 +4,7 @@
 <head>
     <title>Donors List</title>
     @include('dashboard.head')
+  
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -32,7 +33,8 @@
 
                         <form action="{{ url('donor_list') }}" method="GET" class="form-inline">
                             <div class="input-group">
-                                <input type="text" name="search" class="form-control" placeholder="Search Donors..." value="{{ request()->query('search') }}">
+                                <input type="text" name="search" class="form-control" placeholder="Search Donors..."
+                                    value="{{ request()->query('search') }}">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search"></i>
@@ -41,16 +43,16 @@
                             </div>
                         </form>
                         @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
 
                     <!-- Content Row -->
@@ -67,8 +69,16 @@
                                             <th>Establish Year</th>
                                             <th>Amount</th>
                                             <th>No of Beneficiaries</th>
-                                            <th>Edit</th> <!-- New Actions Column -->
-                                            <th>Delete</th> <!-- New Actions Column -->
+
+                                            @if (Auth::user()->usertype != 'user')
+                                                <!-- Check if usertype is not 'user' -->
+                                                <th>Edit</th> <!-- New Actions Column -->
+                                            @endif
+                                            @if (Auth::user()->usertype != 'user')
+                                                <!-- Check if usertype is not 'user' -->
+                                                <th>Delete</th> <!-- New Actions Column -->
+                                            @endif
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,46 +92,36 @@
                                                 <td>{{ $donor->amount_received }}</td>
                                                 <td>{{ $donor->number_of_beneficiaries }}</td>
                                                 <td>
-                                                    <!-- Update Shortcut Button -->
-                                                    <a href="{{ url('donors_edit', $donor->id) }}" class="btn btn-sm btn-warning mb-3" title="Edit">
-                                                        <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
-                                                    </a>
+                                                    @if (Auth::user()->usertype != 'user')
+                                                        <!-- Check if usertype is not 'user' -->
+                                                        <a href="{{ url('donors_edit', $donor->id) }}"
+                                                            class="btn btn-sm btn-warning mb-3" title="Edit">
+                                                            <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
+                                                        </a>
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('donors_delete', $donor->id) }}" class="btn btn-sm btn-danger" title="Delete">
-                                                        <i class="fas fa-edit"></i> <!-- FontAwesome edit icon -->
-                                                    </a>
+                                                    @if (Auth::user()->usertype != 'user')
+                                                        <!-- Check if usertype is not 'user' -->
+                                                        <a href="{{ url('donors_delete', $donor->id) }}"
+                                                            class="btn btn-sm btn-danger" title="Delete">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                            <!-- FontAwesome delete icon -->
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                             <!-- Pagination Links -->
-                            <div class="d-flex justify-content-center">
-                                {{ $donors->links() }}
+                            <div class="d-flex justify-content-center mt-4">
+                                <!-- Bootstrap Pagination -->
+                                {{ $donors->appends(request()->query())->links('pagination::bootstrap-4') }}
                             </div>
-                            <!-- Pagination Links -->
 
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    @include('dashboard.footer')
 </body>
 
 </html>
