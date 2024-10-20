@@ -96,12 +96,12 @@
                                                     @if ($student->images)
                                                         <img src="{{ asset('student_images/' . $student->images) }}"
                                                             alt="Student Image"
-                                                            style="max-width: 80px; max-height: 80px;">
+                                                            style="max-width: 80px; max-height: 80px; border-radius:2   0%;">
                                                     @else
                                                         <img src="{{ asset('student_images/abc/dummy.png') }}"
                                                             alt="Default Photo"
                                                             class="img-fluid rounded-circle border border-secondary"
-                                                            style="width: 200px; height: 200px;">
+                                                            style="width: 200px; height: 200px; border-radius:50%; ">
                                                     @endif
                                                 </td>
                                                 <td>
