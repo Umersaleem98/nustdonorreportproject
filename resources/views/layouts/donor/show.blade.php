@@ -39,7 +39,7 @@
 
     <div class="container mb-4">
         <div class="text-center mt-4">
-            <img src="{{ asset('template/assets/logo.png') }}" alt="Logo" class="text-center" style="width: 200px; height: 100px">
+            <img src="{{ asset('template/assets/logo.png') }}" alt="Logo" class="text-center" style="width: auto; height: 100px">
             <h4 class="text-center mt-2 text-primary">DONOR REPORT</h4>
             <h6 class="reduced-line-space">
                 Registered under Trust Act 1882, vide Registration No. 1289 & 

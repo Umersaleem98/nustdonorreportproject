@@ -12,7 +12,7 @@ use App\Http\Controllers\StudentsDashboardController;
 
 Route::get('/', [DonorController::class, 'index']);
 // Route::get('/donor_profile', [DonorController::class, 'index']);
-Route::get('/donorlogin/{id?}', [DonorController::class, 'loginPage'])->name('login');
+Route::get('/donorlogin/{id?}', [DonorController::class, 'loginPage']);
 Route::post('/login_submit', [DonorController::class, 'authenticate']);
 Route::get('/donor_show/{id}', [DonorController::class, 'show'])->name('donor_show');
 
@@ -20,7 +20,7 @@ Route::get('/donor_show/{id}', [DonorController::class, 'show'])->name('donor_sh
 
 
 
-Route::get('userlogin', [AdminController::class, 'loginindex']);
+Route::get('login', [AdminController::class, 'loginindex'])->name('login');
 Route::post('userlogin', [AdminController::class, 'loginsubmit']);
 Route::get('userregister', [AdminController::class, 'register']);
 Route::post('register_user', [AdminController::class, 'registersubmit']);
@@ -33,12 +33,8 @@ Route::middleware(['auth'])->group(function () {
     // You can add other authenticated routes here
 });
 
-Route::post('/logout', function () {
-    Auth::logout(); // Log the user out
-    return redirect('/userlogin'); // Redirect to login page
-})->name('logout');
 
-
+Route::get('/logout', [AdminController::class, 'logout']);
 
 
 Route::get('students', [StudentsDashboardController::class, 'index']);

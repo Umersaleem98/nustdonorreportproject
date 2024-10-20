@@ -47,7 +47,7 @@ public function index()
     }
 
     // Authentication failed, redirect back to /userlogin with an error message
-    return redirect('/userlogin')->withErrors([
+    return redirect('/login')->withErrors([
         'email' => 'The provided credentials do not match our records.',
     ])->withInput();
 }
@@ -87,14 +87,13 @@ public function index()
 
 
     public function logout(Request $request)
-{
-    Auth::logout(); // Logs out the user
-    
-    // Invalidate the session and regenerate the CSRF token
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+    {
+        Auth::logout(); // Logs out the user
+        
+        // Invalidate the session and regenerate the CSRF token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    return redirect('/userlogin'); // Redirect to the login page after logout
-}
-
+        return redirect('/login'); // Redirect to the login page after logout
+    }
 }
