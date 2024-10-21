@@ -14,26 +14,38 @@ class StudentssImport implements ToModel
     */
     public function model(array $row)
     {
+
+
+
+        if (empty($row[0])) {
+            // Optionally, you can log or handle this case
+            \Log::error('Qalam ID is null or empty', $row);
+            return null; // Skip this row
+        }
+
+
         return new Student([
-            'qalam_id'  => $row[0],
-            'name_of_student'  => $row[1],
-            'father_profession'  => $row[2],
-            'institutions'  => $row[3],
-            'city'  => $row[4],
-            'semester_1'  => $this->castToFloat($row[5]),
-            'semester_2'  => $this->castToFloat($row[6]),
-            'semester_3'  => $this->castToFloat($row[7]),
-            'semester_4'  => $this->castToFloat($row[8]),
-            'semester_5'  => $this->castToFloat($row[9]),
-            'semester_6'  => $this->castToFloat($row[10]),
-            'semester_7'  => $this->castToFloat($row[11]),
-            'semester_8'  => $this->castToFloat($row[12]),
-            'program'  => $row[13],
-            'nust_trust_fund_donor_name'  => $row[14],
-            'degree'  => $row[15],
-            'year_of_admission'  => $this->castToInt($row[16]),
-            'remarks_status'  => $row[17],
-            'donor_id'  => $this->castToInt($row[18]),  // Ensure this is the correct index for donor_id
+            'qalam_id'                => $this->castToInt($row[0]),  // Qalam ID as integer
+            'name_of_student'         => $row[1],                   // Name of Student as string
+            'father_profession'       => $row[2],                   // Father's Profession as string
+            'institutions'            => $row[3],                   // Institutions as string
+            'city'                    => $row[4],                   // City as string
+            'semester_1'              => $this->castToFloat($row[5]), // Semester 1 as float
+            'semester_2'              => $this->castToFloat($row[6]), // Semester 2 as float
+            'semester_3'              => $this->castToFloat($row[7]), // Semester 3 as float
+            'semester_4'              => $this->castToFloat($row[8]), // Semester 4 as float
+            'semester_5'              => $this->castToFloat($row[9]), // Semester 5 as float
+            'semester_6'              => $this->castToFloat($row[10]), // Semester 6 as float
+            'semester_7'              => $this->castToFloat($row[11]), // Semester 7 as float
+            'semester_8'              => $this->castToFloat($row[12]), // Semester 8 as float
+            'program'                 => $row[13],                  // Program as string
+            'nust_trust_fund_donor_name' => $row[14],               // NUST Trust Fund Donor Name as string
+            'degree'                  => $row[15],                  // Degree as string
+            'year_of_admission'       => $this->castToInt($row[16]), // Year of Admission as integer
+            'remarks_status'          => $row[17],                  // Remarks Status as string
+            'donor_id'                => $this->castToInt($row[18]), // Donor ID as integer
+            'student_status'          => $row[19],                  // Student Status as string
+            'images'                  => $row[20],                  // Images as string
         ]);
     }
 
