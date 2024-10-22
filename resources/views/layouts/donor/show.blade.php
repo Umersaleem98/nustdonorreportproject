@@ -123,7 +123,7 @@
                                                 {{ $student->father_profession }}</h6>
                                             <h6 class="card-text"><strong>Intake Year:</strong>
                                                 {{ $student->year_of_admission }}</h6>
-                                            <h6 class="card-text"><strong>Intake Year:</strong>
+                                            <h6 class="card-text"><strong>Student Status:</strong>
                                                 {{ $student->student_status }}</h6>
                                         </div>
                                     </div>
@@ -156,12 +156,12 @@
     </div>
     <!-- Add this new section after the "Students Sponsored" section -->
     <div class="container mt-5 p-3">
-        <h2 class="my-4 text-center bg-primary text-light p-2" style="font-size: 2rem;">Note of Thanks</h2>
+        <h2 class="my-4 text-center bg-primary text-light p-1" style="font-size: 2rem;">Note of Thanks</h2>
         <div class="row">
             <!-- Left side (Image) -->
             <div class="col-md-4 text-center">
                 <img src="{{ asset('student_images/abc/Arooba_Gillani.png') }}" alt="Thank You" class="img-fluid"
-                    style="width: 100%; height: 400px; border-radius: 20%; ">
+                    style="width: 100%; height: 400px; border-radius: 10%; ">
 
             </div>
 
@@ -172,12 +172,13 @@
                     Greeting Donors!
                 </p>
                 <p class="">
-                    On behalf of the National University of Sciences and Technology (NUST), I wish to extend our deepest
-                    gratitude for your generous support of our deserving scholars facing financial challenges. Your
-                    contributions empower nearly 400 students each year to pursue their education and turn their
-                    aspirations into reality. Your kindness not only alleviates financial burdens but also ignites an
-                    intergenerational impact which creates ripples of change across communities.
-                    Together, we are making a meaningful difference in the lives of our students.
+                    I want to humbly share my utmost gratitude to each and everyone of you for making an impact and helping us in transforming student lives through your generous donations. The contributions that you make towards the scholars not only alleviates fee burdens but also creates a ripple affect of change across communities. Thank you for choosing to invest in education – for it has the power to make perpetual impact and turn aspirations of many into reality. 
+                </p>
+                <p class="">
+                    Thank you for helping us build a better nation through transformative education
+                </p>
+                <p class="">
+                    Together, we are truly making a meaningful difference in the lives of our students.
                 </p>
 
                 <!-- Name and Designation (Bottom Right) -->
@@ -192,15 +193,12 @@
     </div>
 
     <div class="float-button">
-        <!-- Logout Button -->
-        <form action="{{ url('logout') }}" method="POST" style="display: inline;">
-            @csrf
-            <button type="submit"
+
+            <a href="{{ url('logout') }}"
                 style="background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
                 Logout
-            </button>
-        </form>
-    </div>
+            </a>
+       </div>
 
     <br><br>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
 use App\Models\Donor;
 use App\Models\Student;
@@ -14,15 +15,20 @@ class AdminController extends Controller
 {
    // AdminController.php
 
-public function index()
-{
-    $students = Student::all();
-    $studentsCount = $students->count();  // Count total donors
-    $donors = Donor::all();  // Retrieve all donors
-    $donorCount = $donors->count();  // Count total donors
-    return view('dashboard', compact('donors', 'donorCount', 'students','studentsCount')); // Pass donors and donorCount to the view
-}
-
+   public function index()
+   {
+       $students = Student::all();
+       $studentsCount = $students->count();  // Count total students
+   
+       // Count students where student_status is 'qualified'
+       $qualifiedStudentsCount = Student::where('remarks_status', 'qualified')->count();
+   
+       $donors = Donor::all();  // Retrieve all donors
+       $donorCount = $donors->count();  // Count total donors
+   
+       return view('dashboard', compact('donors', 'donorCount', 'students', 'studentsCount', 'qualifiedStudentsCount'));
+   }
+   
     
     public function loginindex()
     {
@@ -94,6 +100,6 @@ public function index()
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login'); // Redirect to the login page after logout
+        return redirect('/donorlogin'); // Redirect to the login page after logout
     }
 }

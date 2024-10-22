@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DonorController extends Controller
@@ -57,6 +58,16 @@ class DonorController extends Controller
         return view('layouts.donor.show', compact('donor'));
     }
 
+    public function logout_donor()
+    {
+        Auth::logout(); // Logs out the user
+        
+        // Invalidate the session and regenerate the CSRF token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login'); // Redirect to the login page after logout
+    }
 
 
 }

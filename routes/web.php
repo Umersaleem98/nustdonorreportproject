@@ -15,6 +15,7 @@ Route::get('/', [DonorController::class, 'index']);
 Route::get('/donorlogin/{id?}', [DonorController::class, 'loginPage']);
 Route::post('/login_submit', [DonorController::class, 'authenticate']);
 Route::get('/donor_show/{id}', [DonorController::class, 'show'])->name('donor_show');
+Route::get('/logout', [DonorController::class, 'logout_donor']);
 
 
 
@@ -32,8 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);  // /admin route is now for the dashboard
     // You can add other authenticated routes here
 });
-
-
 Route::get('/logout', [AdminController::class, 'logout']);
 
 
