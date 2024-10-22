@@ -184,9 +184,11 @@
                 <!-- Name and Designation (Bottom Right) -->
                 <div class="position-absolute" style="bottom: auto; right: 10px;">
                     <h4 class="font-weight-bold mb-0">Arooba Gillani</h4>
-                    <small class="text-muted">Director Advancement and Head of Global Linkages
-                        NUST</small><br>
-                    <small class="text-muted">Director.uao@nust.edu.pk</small>
+                    <small class="text-muted">Director Advancement and</small><br>
+                    <small class="text-muted">Head of Global Linkages
+                        NUST</small>
+                        <br>
+                    <small class="text-dark"><a href="" class="text-primary">Director.uao@nust.edu.pk</a></small>
                 </div>
             </div>
         </div>
