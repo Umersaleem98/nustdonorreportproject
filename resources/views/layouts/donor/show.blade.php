@@ -159,14 +159,14 @@
         <h2 class="my-4 text-center bg-primary text-light p-1" style="font-size: 2rem;">Note of Thanks</h2>
         <div class="row">
             <!-- Left side (Image) -->
-            <div class="col-md-4 text-center">
+            {{-- <div class="col-md-4 text-center">
                 <img src="{{ asset('student_images/abc/Arooba_Gillani.png') }}" alt="Thank You" class="img-fluid"
                     style="width: 100%; height: 400px; border-radius: 10%; ">
 
-            </div>
+            </div> --}}
 
             <!-- Right side (Text) -->
-            <div class="col-md-8 position-relative mt-5">
+            <div class="col-md-12 position-relative mt-5 mb-5">
                 {{-- <h4 class="text-dark mt-4">Thank You to Our Donors</h4> --}}
                 <p class="mt-3">
                     Greeting Donors!
