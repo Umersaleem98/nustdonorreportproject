@@ -66,4 +66,22 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+    <!-- Nav Item - Add New Students -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('annual_zakat_trasnaction_history') }}">
+            <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
+            <span>Annual and Zakat Traction Report</span>
+        </a>
+    </li>
+@endif
+    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+    <!-- Nav Item - Add New Students -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('add_trasnaction_report') }}">
+            <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
+            <span>Add Traction Report</span>
+        </a>
+    </li>
+@endif
 </ul>

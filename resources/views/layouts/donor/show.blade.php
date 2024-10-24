@@ -154,34 +154,61 @@
             @endif
         </div>
     </div>
+
+    <div class="container">
+        <h2 class="my-4 text-center bg-primary text-light p-1">Transaction History</h2>
+        @if ($donor->transactions->isEmpty())
+            <div class="alert alert-info">No transaction history found for this donor.</div>
+        @else
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Transaction Date</th>
+                            <th scope="col">Mode of Transaction</th>
+                            <th scope="col">Amount Received (PKR)</th>
+                            <th scope="col">Receipt Acknowledgement</th>
+                            <th scope="col">Fund Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($donor->transactions as $transaction)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d M Y') }}</td>
+                                <td>{{ $transaction->mode_of_transaction }}</td>
+                                <td>{{ number_format($transaction->amount_received, 2) }}</td>
+                                <td>{{ $transaction->receipt_acknowledgement }}</td>
+                                <td>{{ $transaction->fund_type }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    </div>
+    
+    
     <!-- Add this new section after the "Students Sponsored" section -->
     <div class="container mt-5 p-3">
         <h2 class="my-4 text-center bg-primary text-light p-1" style="font-size: 2rem;">Note of Thanks</h2>
         <div class="row">
-            <!-- Left side (Image) -->
-            {{-- <div class="col-md-4 text-center">
-                <img src="{{ asset('student_images/abc/Arooba_Gillani.png') }}" alt="Thank You" class="img-fluid"
-                    style="width: 100%; height: 400px; border-radius: 10%; ">
-
-            </div> --}}
-
-            <!-- Right side (Text) -->
+            
             <div class="col-md-12 position-relative mt-5 mb-5">
-                {{-- <h4 class="text-dark mt-4">Thank You to Our Donors</h4> --}}
                 <p class="mt-3">
                     Greeting Donors!
                 </p>
                 <p class="">
-                    I want to humbly share my utmost gratitude to each and everyone of you for making an impact and helping us in transforming student lives through your generous donations. The contributions that you make towards the scholars not only alleviates fee burdens but also creates a ripple affect of change across communities. Thank you for choosing to invest in education – for it has the power to make perpetual impact and turn aspirations of many into reality. 
+                    I want to express my heartfelt gratitude for your  generosity in supporting our scholars. Your donation has a profound impact, alleviating financial burdens and transforming lives.
+                    Your investment in education creates a ripple effect of change, empowering students to achieve their dreams and uplift their communities. Your contribution is a legacy that will shape the futures of deserving students.
                 </p>
                 <p class="">
                     Thank you for helping us build a better nation through transformative education
-                </p>
-                <p class="">
                     Together, we are truly making a meaningful difference in the lives of our students.
                 </p>
+                {{-- <p class="">
+                    Together, we are truly making a meaningful difference in the lives of our students.
+                </p> --}}
 
-                <!-- Name and Designation (Bottom Right) -->
                 <div class="position-absolute" style="bottom: auto; right: 10px;">
                     <h4 class="font-weight-bold mb-0">Arooba Gillani</h4>
                     <small class="text-muted">Director Advancement and</small><br>

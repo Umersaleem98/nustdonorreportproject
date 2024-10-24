@@ -48,9 +48,6 @@ class DonorController extends Controller
         }
     }
     
-
-
-    
     public function show($id)
     {
         // Fetch the donor by ID

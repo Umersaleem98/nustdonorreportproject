@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonorDashboardController;
 use App\Http\Controllers\StudentsDashboardController;
+use App\Http\Controllers\DashboardTransactionHistoryController;
 
 // Route::get('/', [HomeController::class, 'index']);
 
@@ -45,4 +46,9 @@ Route::get('donor_list', [DonorDashboardController::class, 'index']);
 Route::get('donors_edit/{id}', [DonorDashboardController::class, 'edit']);
 Route::post('update_donor/{id}', [DonorDashboardController::class, 'update']);
 Route::get('donors_delete/{id}', [DonorDashboardController::class, 'delete']);
+
+Route::get('annual_zakat_trasnaction_history', [DashboardTransactionHistoryController::class, 'index']);
+Route::get('add_trasnaction_report', [DashboardTransactionHistoryController::class, 'add_trasnaction_report_form']);
+Route::post('transactions_store', [DashboardTransactionHistoryController::class, 'store']);
+
 

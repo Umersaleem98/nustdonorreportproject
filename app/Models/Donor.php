@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransactionHistory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Donor extends Model
 {
@@ -21,6 +22,11 @@ class Donor extends Model
         'number_of_beneficiaries',
     ];
 
+
+    public function transactions()
+    {
+        return $this->hasMany(TransactionHistory::class);
+    }
     // You can also define relationships if necessary, for example:
     public function students()
     {
