@@ -61,7 +61,6 @@ public function store(Request $request)
     $transaction->save();
 
     // Redirect back with a success message
-    return view('dashboard.annua_zakat_transaction_history.addtransection') // Change to your route name
-                     ->with('success', 'Transaction added successfully!');
+    return back()->with('success', 'Transaction added successfully!');
 }
 }

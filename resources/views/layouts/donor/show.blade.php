@@ -123,8 +123,12 @@
                                                 {{ $student->father_profession }}</h6>
                                             <h6 class="card-text"><strong>Intake Year:</strong>
                                                 {{ $student->year_of_admission }}</h6>
-                                            <h6 class="card-text"><strong>Student Status:</strong>
-                                                {{ $student->student_status }}</h6>
+                                                <h6 class="card-text">
+                                                    <strong>Remarks Status:</strong> 
+                                                    <span style="{{ $student->remarks_status == 'Qualified' ? 'color: red;' : 'color: black;' }}">
+                                                        {{ $student->remarks_status }}
+                                                    </span>
+                                                </h6>
                                         </div>
                                     </div>
 
