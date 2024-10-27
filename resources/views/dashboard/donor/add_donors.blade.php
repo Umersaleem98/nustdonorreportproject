@@ -50,7 +50,7 @@
                             <div style="overflow-x:auto;">
 
                                 <!-- Form Start -->
-                                <form action="{{ url('add_donor') }}" method="POST">
+                                <form action="{{ url('add_donor') }}" method="POST" enctype="multipart/form-data">
                                     @csrf <!-- CSRF Token for security -->
                                 
                                     <!-- Donor Name -->
@@ -95,6 +95,11 @@
                                         <input type="number" class="form-control" id="number_of_beneficiaries" name="number_of_beneficiaries" placeholder="Enter Number of Beneficiaries" required>
                                     </div>
                                 
+
+                                    <div class="form-group">
+                                        <label for="donor_report_file">Donor Report File</label>
+                                        <input type="file" name="donor_report_file" class="form-control-file" id="donor_report_file">
+                                    </div>
                                     <!-- Submit Button -->
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

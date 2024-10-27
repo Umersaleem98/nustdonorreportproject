@@ -20,6 +20,7 @@ class Donor extends Model
         'year_of_establishment',
         'amount_received',
         'number_of_beneficiaries',
+        'donor_report_file',
     ];
 
 

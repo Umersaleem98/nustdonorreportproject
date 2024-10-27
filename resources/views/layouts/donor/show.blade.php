@@ -65,24 +65,34 @@
         <div class="container mt-5">
             <h2 class="text-center bg-primary text-light p-2">Donor Report: {{ $donor->donor_name }}</h2>
             <div class="row">
-
-
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
                             <h6 class="card-title font-weight-bold">{{ $donor->fund_name }}</h6>
-                            <h6 class="card-text"><strong>Year of Establishment:</strong>
-                                {{ $donor->year_of_establishment }}</h6>
-                            <h6 class="card-text"><strong>Amount Received:</strong>
-                                {{ number_format($donor->amount_received, 2) }} PKR</h6>
-                            <h6 class="card-text"><strong>Number of Beneficiaries:</strong>
-                                {{ $donor->number_of_beneficiaries }}</h6>
+                            <h6 class="card-text"><strong>Year of Establishment:</strong> {{ $donor->year_of_establishment }}</h6>
+                            <h6 class="card-text"><strong>Amount Received:</strong> {{ number_format($donor->amount_received, 2) }} PKR</h6>
+                            <h6 class="card-text"><strong>Number of Beneficiaries:</strong> {{ $donor->number_of_beneficiaries }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title text-center font-weight-bold">View Report</h3>
+                            <div class="d-flex justify-content-center">
+                                <!-- View Button: Opens the file in a new tab -->
+                                <a href="{{ asset($donor->donor_report_file) }}" target="_blank" class="btn btn-warning me-2">View Report</a>
+        
+                                <!-- Download Button: Downloads the file directly -->
+                                <a href="{{ asset($donor->donor_report_file) }}" download class="btn btn-success">Download Report</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
+        
         <!-- Students Section -->
         <div class="container">
             <h2 class="my-4 text-center bg-primary text-light p-2">Students Sponsored</h2>

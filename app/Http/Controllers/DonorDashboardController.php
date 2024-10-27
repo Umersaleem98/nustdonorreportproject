@@ -52,25 +52,37 @@ class DonorDashboardController extends Controller
             'year_of_establishment' => 'required|integer',
             'amount_received' => 'required|regex:/^\d+(\.\d{1,2})?$/', // Decimal validation
             'number_of_beneficiaries' => 'required|integer',
+            'donor_report_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // File validation (optional)
         ]);
     
-        try {
-            // Attempt to create a new donor
-            Donor::create([
-                'donor_name' => $request->donor_name,
-                'fund_name' => $request->fund_name,
-                'donor_email' => $request->donor_email,
-                'password' => bcrypt($request->password), // Hash the password
-                'year_of_establishment' => $request->year_of_establishment,
-                'amount_received' => $request->amount_received,
-                'number_of_beneficiaries' => $request->number_of_beneficiaries,
-            ]);
+        // Handle the file upload if it exists
+        $filePath = null;
+        if ($request->hasFile('donor_report_file')) {
+            $file = $request->file('donor_report_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('student_reports'), $fileName);
     
-            // Redirect with success message
+            // Store the file path
+            $filePath = 'student_reports/' . $fileName;
+        }
+    
+        // Create a new donor and check for success
+        $donor = Donor::create([
+            'donor_name' => $request->donor_name,
+            'fund_name' => $request->fund_name,
+            'donor_email' => $request->donor_email,
+            'password' => bcrypt($request->password), // Hash the password
+            'year_of_establishment' => $request->year_of_establishment,
+            'amount_received' => $request->amount_received,
+            'number_of_beneficiaries' => $request->number_of_beneficiaries,
+            'donor_report_file' => $filePath, // Store the file path in the database
+        ]);
+    
+        // Redirect with appropriate message based on the outcome
+        if ($donor) {
             return redirect()->back()->with('success', 'Donor information added successfully');
-        } catch (Exception $e) {
-            // Catch any errors and redirect back with an error message
-            return redirect()->back()->with('error', 'Failed to add donor: ' . $e->getMessage());
+        } else {
+            return redirect()->back()->with('error', 'Failed to add donor');
         }
     }
     
@@ -90,15 +102,27 @@ public function edit($id)
 }
 
 
-
 public function update(Request $request, $id)
 {
+    $request->validate([
+        'donor_name' => 'required|string|max:255',
+        'fund_name' => 'required|string|max:255',
+        'donor_email' => 'required|email|max:255',
+        'year_of_establishment' => 'required|integer|min:1900|max:' . date('Y'),
+        'amount_received' => 'required|numeric|min:0',
+        'number_of_beneficiaries' => 'required|integer|min:0',
+        'password' => 'nullable|string|min:6|confirmed',
+        'donor_report_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // Validate file type and size
+    ]);
+
+    // Find the donor record
     $donors = Donor::find($id);
 
     if (!$donors) {
         return back()->with('error', 'Donor not found');
     }
 
+    // Update donor details
     $donors->donor_name = $request->donor_name;
     $donors->fund_name = $request->fund_name;
     $donors->donor_email = $request->donor_email;
@@ -106,15 +130,36 @@ public function update(Request $request, $id)
     $donors->amount_received = $request->amount_received;
     $donors->number_of_beneficiaries = $request->number_of_beneficiaries;
 
-    // Check if the password field is filled, and update it if necessary
+    // Update password only if provided
     if ($request->filled('password')) {
         $donors->password = bcrypt($request->password);
     }
 
+    // Check if a new donor report file has been uploaded
+    if ($request->hasFile('donor_report_file')) {
+        // Delete the old file if it exists
+        if ($donors->donor_report_file) {
+            $oldFilePath = public_path($donors->donor_report_file);
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath); // Delete the existing file
+            }
+        }
+
+        // Move the new file to the public directory
+        $file = $request->file('donor_report_file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('student_reports'), $fileName);
+    
+        // Store the new file path
+        $donors->donor_report_file = 'student_reports/' . $fileName;
+    }
+
+    // Save the updated donor record
     $donors->save();
 
     return redirect()->back()->with('success', 'Donor updated successfully');
 }
+
 
     public function delete($id)
     {

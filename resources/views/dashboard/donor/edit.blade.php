@@ -50,7 +50,7 @@
                             <div style="overflow-x:auto;">
 
                                 <!-- Form Start -->
-                                <form action="{{ url('update_donor', $donors->id) }}" method="POST">
+                                <form action="{{ url('update_donor', $donors->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf <!-- Laravel CSRF token -->
                                     
                                     <div class="form-group">
@@ -108,6 +108,14 @@
                                             placeholder="Enter Number of Beneficiaries">
                                     </div>
 
+
+                                    <div class="form-group">
+                                        <label for="donor_report_file">Donor Report File</label>
+                                        <input type="file" name="donor_report_file" class="form-control-file" id="donor_report_file">
+                                        @if($donors->donor_report_file)
+                                            <p>Current File: <a href="{{ asset($donors->donor_report_file) }}" target="_blank">View Current Report</a></p>
+                                        @endif
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </form>
                             </div>
