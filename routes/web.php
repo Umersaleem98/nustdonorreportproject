@@ -17,6 +17,7 @@ Route::get('/donorlogin/{id?}', [DonorController::class, 'loginPage']);
 Route::post('/login_submit', [DonorController::class, 'authenticate']);
 Route::get('/donor_show/{id}', [DonorController::class, 'show'])->name('donor_show');
 Route::get('/logout', [DonorController::class, 'logout_donor']);
+Route::post('/update_donor_profile/{id}', [DonorController::class, 'update_profile']);
 
 Route::get('login', [AdminController::class, 'loginindex'])->name('login');
 Route::post('userlogin', [AdminController::class, 'loginsubmit']);

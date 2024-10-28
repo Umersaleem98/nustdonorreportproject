@@ -40,8 +40,6 @@ class DonorDashboardController extends Controller
         return view('dashboard.donor.add_donors');
     }
 
-
-
     public function adddonors(Request $request)
     {
         // Validate the request data

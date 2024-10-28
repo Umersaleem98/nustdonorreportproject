@@ -6,6 +6,9 @@ use App\Models\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 
 class DonorController extends Controller
 {
@@ -64,6 +67,24 @@ class DonorController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login'); // Redirect to the login page after logout
+    }
+
+
+
+    public function update_profile(Request $request, $id)
+    {
+        $donor = Donor::find($id);
+
+        // dd($donor);
+
+    $donor->donor_email = $request->donor_email;
+    $donor->password = bcrypt($request->password);
+
+
+    // Save the updated donor record
+    $donor->save();
+
+    return redirect()->back()->with('success', 'Donor updated successfully');
     }
 
 

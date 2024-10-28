@@ -69,9 +69,12 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h6 class="card-title font-weight-bold">{{ $donor->fund_name }}</h6>
-                            <h6 class="card-text"><strong>Year of Establishment:</strong> {{ $donor->year_of_establishment }}</h6>
-                            <h6 class="card-text"><strong>Amount Received:</strong> {{ number_format($donor->amount_received, 2) }} PKR</h6>
-                            <h6 class="card-text"><strong>Number of Beneficiaries:</strong> {{ $donor->number_of_beneficiaries }}</h6>
+                            <h6 class="card-text"><strong>Year of Establishment:</strong>
+                                {{ $donor->year_of_establishment }}</h6>
+                            <h6 class="card-text"><strong>Amount Received:</strong>
+                                {{ number_format($donor->amount_received, 2) }} PKR</h6>
+                            <h6 class="card-text"><strong>Number of Beneficiaries:</strong>
+                                {{ $donor->number_of_beneficiaries }}</h6>
                         </div>
                     </div>
                 </div>
@@ -81,18 +84,25 @@
                             <h3 class="card-title text-center font-weight-bold">View Report</h3>
                             <div class="d-flex justify-content-center">
                                 <!-- View Button: Opens the file in a new tab -->
-                                <a href="{{ asset($donor->donor_report_file) }}" target="_blank" class="btn btn-warning me-2">View Report</a>
-        
+                                <a href="{{ asset($donor->donor_report_file) }}" target="_blank"
+                                    class="btn btn-warning me-2">View Report</a>
+
                                 <!-- Download Button: Downloads the file directly -->
-                                <a href="{{ asset($donor->donor_report_file) }}" download class="btn btn-success">Download Report</a>
+                                <a href="{{ asset($donor->donor_report_file) }}" download
+                                    class="btn btn-success">Download Report</a>
+
+                                <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
+                                    data-bs-target="#alertModal">
+                                    Show Form
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
+
+
         <!-- Students Section -->
         <div class="container">
             <h2 class="my-4 text-center bg-primary text-light p-2">Students Sponsored</h2>
@@ -133,12 +143,13 @@
                                                 {{ $student->father_profession }}</h6>
                                             <h6 class="card-text"><strong>Intake Year:</strong>
                                                 {{ $student->year_of_admission }}</h6>
-                                                <h6 class="card-text">
-                                                    <strong>Remarks Status:</strong> 
-                                                    <span style="{{ $student->remarks_status == 'Qualified' ? 'color: red;' : 'color: black;' }}">
-                                                        {{ $student->remarks_status }}
-                                                    </span>
-                                                </h6>
+                                            <h6 class="card-text">
+                                                <strong>Remarks Status:</strong>
+                                                <span
+                                                    style="{{ $student->remarks_status == 'Qualified' ? 'color: red;' : 'color: black;' }}">
+                                                    {{ $student->remarks_status }}
+                                                </span>
+                                            </h6>
                                         </div>
                                     </div>
 
@@ -200,20 +211,23 @@
             </div>
         @endif
     </div>
-    
-    
+
+
     <!-- Add this new section after the "Students Sponsored" section -->
     <div class="container mt-5 p-3">
         <h2 class="my-4 text-center bg-primary text-light p-1" style="font-size: 2rem;">Note of Thanks</h2>
         <div class="row">
-            
+
             <div class="col-md-12 position-relative mt-5 mb-5">
                 <p class="mt-3">
                     Greeting Donors!
                 </p>
                 <p class="">
-                    I want to express my heartfelt gratitude for your  generosity in supporting our scholars. Your donation has a profound impact, alleviating financial burdens and transforming lives.
-                    Your investment in education creates a ripple effect of change, empowering students to achieve their dreams and uplift their communities. Your contribution is a legacy that will shape the futures of deserving students.
+                    I want to express my heartfelt gratitude for your generosity in supporting our scholars. Your
+                    donation has a profound impact, alleviating financial burdens and transforming lives.
+                    Your investment in education creates a ripple effect of change, empowering students to achieve their
+                    dreams and uplift their communities. Your contribution is a legacy that will shape the futures of
+                    deserving students.
                 </p>
                 <p class="">
                     Thank you for helping us build a better nation through transformative education
@@ -228,7 +242,7 @@
                     <small class="text-muted">Director Advancement and</small><br>
                     <small class="text-muted">Head of Global Linkages
                         NUST</small>
-                        <br>
+                    <br>
                     <small class="text-dark"><a href="" class="text-primary">Director.uao@nust.edu.pk</a></small>
                 </div>
             </div>
@@ -237,13 +251,53 @@
 
     <div class="float-button">
 
-            <a href="{{ url('logout') }}"
-                style="background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
-                Logout
-            </a>
-       </div>
+        <a href="{{ url('logout') }}"
+            style="background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
+            Logout
+        </a>
+    </div>
 
     <br><br>
+
+    <!-- Button to Trigger Alert Modal -->
+
+
+    <!-- Alert Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">Update Donor Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="alertModalBody">
+
+                    <form action="{{ url('update_donor_profile', $donor->id) }}" method="POST">
+                        @csrf
+                        <!-- Donor Email Field -->
+                        <div class="mb-3">
+                            <label for="donorEmail" class="form-label">Donor Email</label>
+                            <input type="email" class="form-control" id="donorEmail" name="donor_email"
+                                value="{{ $donor->donor_email }}" required readonly>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+
+                        <!-- Update Button -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -318,6 +372,33 @@
                 }
             });
         @endforeach
+    </script>
+    <script>
+        function showAlert(message) {
+            // Set the alert message
+            document.getElementById("alertModalBody").innerText = message;
+
+            // Show the modal using Bootstrap's modal function
+            const alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
+            alertModal.show();
+        }
+    </script>
+
+
+    <!-- Include Bootstrap JS (necessary for modal) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to show the custom alert
+        function showAlert(message) {
+            // Set the message in the modal body
+            document.getElementById('alertModalBody').innerText = message;
+
+            // Show the alert modal
+            var alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+            alertModal.show();
+        }
     </script>
 
 </body>
