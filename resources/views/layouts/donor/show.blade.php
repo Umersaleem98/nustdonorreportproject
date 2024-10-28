@@ -162,10 +162,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <h4 class="text-dark mt-5 text-center">Thank You Note</h4>
-                                            <p>
-                                                {{-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus in
-                                                deserunt cum itaque doloribus deleniti eius eligendi tenetur, vero optio
-                                                natus ipsam autem voluptas, at accusamus atque delectus maxime sit. --}}
+                                            <p class="text-dark">
+                                               {{ $student->note_of_thanks }}"
                                             </p>
                                         </div>
 
