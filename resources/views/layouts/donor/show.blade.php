@@ -130,7 +130,7 @@
                                         </div>
 
                                         <!-- Student Info -->
-                                        <div class="col-md-8">
+                                        <div class="col-md-4">
                                             <h6 class="card-text" style="font-size: 14px;"><strong>Registration No:</strong> {{ $student->qalam_id }}</h6>
                                             <h6 class="card-text" style="font-size: 14px;"><strong>Student Name:</strong> {{ $student->name_of_student }}</h6>
                                             <h6 class="card-text" style="font-size: 14px;"><strong>Institution:</strong> {{ $student->institutions }}</h6>
@@ -145,29 +145,26 @@
                                             </h6>
                                         </div>
                                         
-                                    </div>
-
-                                    <div class="row mt-3">
-
-                                        <div class="col-md-5 mb-3">
-                                            <h6 class="text-center">Academic Growth</h6>
+                                        <div class="col-md-4 mb-3">
+                                            
                                             {{-- <canvas id="cgpaChart{{ $student->id }}"></canvas> --}}
                                             <canvas id="cgpaChart{{ $student->id }}"
-                                                style="width: 100%; height: 250px; border: 2px solid rgb(2, 121, 233)"></canvas>
+                                                style="width: 100%; height: 200px; border: 2px solid rgb(2, 121, 233)"></canvas>
+                                                <h6 class="text-center">Academic Record</h6>
                                         </div>
-                                        <div class="col-md-6">
+                                    </div>
+
+                                    <div class="row mt-1 justify-content-center">
+                                        <div class="col-md-8 text-center">
                                             @if ($loop->first)
-                                            <h4 class="text-dark mt-5 text-center">Thank You Note</h4>
-                                          
+                                                <h4 class="text-dark mt-5">Thank You Note</h4>
                                                 <p class="text-dark">
-                                                   {{ $student->note_of_thanks }}
+                                                    {{ $student->note_of_thanks }}
                                                 </p>
                                             @endif
                                         </div>
-                                        
-
                                     </div>
-
+                                    
                                 </div>
                             </div>
                         </div>
@@ -236,8 +233,7 @@
         <div class="row">
 
             <div class="col-md-12 position-relative mt-3 mb-5">
-                <p class="mt-3">
-                    Greeting!</p>
+                <p class="mt-3"><i>Greeting!</i></p>
                 <p class="" style="font-size: 14px;">
                     On behalf of our students and community, I want to extend my sincerest gratitude for your generous support. Your donation has a profound impact on the lives of our scholars, helping to alleviate financial burdens and open doors to opportunities that might otherwise remain out of reach.
                 </p>
@@ -247,16 +243,19 @@
                 <p class="" style="font-size: 14px;">
                     Thank you once again for making a meaningful difference in the lives of our students and for believing in the power of education to change lives. We are honored to have you as a partner in this important mission.
                 </p>
+                <p class="" style="font-size: 14px;">
+                    With warmest regards and heartfelt thanks,
+                </p>
                 {{-- <p class="">
                     Together, we are truly making a meaningful difference in the lives of our students.
                 </p> --}}
 
                 <div class="position-absolute" style="bottom: auto; right: 10px;">
-                    <h6 class="font-weight-bold mb-0">With warmest regards and heartfelt thanks,</h6>
+                    {{-- <h6 class="font-weight-bold mb-0">With warmest regards and heartfelt thanks,</h6> --}}
                     <h6 class="font-weight-bold mb-0">Arooba Gillani</h6>
-                    <small class="text-muted">Director Advancement and</small><br>
-                    <small class="text-muted">Head of Global Linkages
-                        NUST</small>
+                    <small class="text-muted">Director Advancement</small>
+                    {{-- <small class="text-muted">Head of Global Linkages
+                        NUST</small> --}}
                     <br>
                     <small class="text-dark"><a href="" class="text-primary">Director.uao@nust.edu.pk</a></small>
                 </div>
@@ -322,22 +321,34 @@
     <script>
         @foreach ($donor->students as $student)
             var ctx{{ $student->id }} = document.getElementById('cgpaChart{{ $student->id }}').getContext('2d');
+    
+            // Create an array of CGPA values
+            var cgpaValues = [
+                {{ $student->semester_1 }},
+                {{ $student->semester_2 }},
+                {{ $student->semester_3 }},
+                {{ $student->semester_4 }},
+                {{ $student->semester_5 }},
+                {{ $student->semester_6 }},
+                {{ $student->semester_7 }},
+                {{ $student->semester_8 }}
+            ];
+    
+            // Filter out CGPA values that are less than or equal to 0
+            var filteredValues = cgpaValues.filter(value => value > 0);
+            var labels = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'];
+            
+            // Filter labels based on the corresponding CGPA values
+            var filteredLabels = labels.filter((_, index) => cgpaValues[index] > 0);
+    
+            // Create the chart
             new Chart(ctx{{ $student->id }}, {
                 type: 'bar',
                 data: {
-                    labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'],
+                    labels: filteredLabels, // Use the filtered labels
                     datasets: [{
                         label: 'CGPA',
-                        data: [
-                            {{ $student->semester_1 }},
-                            {{ $student->semester_2 }},
-                            {{ $student->semester_3 }},
-                            {{ $student->semester_4 }},
-                            {{ $student->semester_5 }},
-                            {{ $student->semester_6 }},
-                            {{ $student->semester_7 }},
-                            {{ $student->semester_8 }}
-                        ],
+                        data: filteredValues, // Use the filtered CGPA values
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1
@@ -346,13 +357,17 @@
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            min: 0,  // Set the minimum value for the y-axis
+                            max: 4   // Set the maximum value for the y-axis
                         }
                     }
                 }
             });
         @endforeach
     </script>
+    
+
     @include('layouts.footer')
 
     <!-- JavaScript for rendering all students' charts -->
