@@ -63,49 +63,48 @@
         </div>
 
         <div class="container mt-5">
-            <h2 class="text-center bg-primary text-light p-2">Donor Report: {{ $donor->donor_name }}</h2>
+            <h5 class="text-center bg-primary text-light">Donor Report: {{ $donor->donor_name }}</h5>
             <div class="row">
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h6 class="card-title font-weight-bold">{{ $donor->fund_name }}</h6>
-                            <h6 class="card-text"><strong>Year of Establishment:</strong>
-                                {{ $donor->year_of_establishment }}</h6>
-                            <h6 class="card-text"><strong>Amount Received:</strong>
-                                {{ number_format($donor->amount_received, 2) }} PKR</h6>
-                            <h6 class="card-text"><strong>Number of Beneficiaries:</strong>
-                                {{ $donor->number_of_beneficiaries }}</h6>
+                            <p style="font-size: 14px; line-height: 1.1;">{{ $donor->fund_name }}</p>
+                            <p style="font-size: 14px; line-height: 1.1;"><strong>Year of Establishment:</strong> {{ $donor->year_of_establishment }}</p>
+                            <p style="font-size: 14px; line-height: 1.1;"><strong>Amount Received:</strong> {{ number_format($donor->amount_received, 2) }} PKR</p>
+                            <p style="font-size: 14px; line-height: 1.1;"><strong>Number of Beneficiaries:</strong> {{ $donor->number_of_beneficiaries }}</p>
                         </div>
                     </div>
                 </div>
+                
+                
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h3 class="card-title text-center font-weight-bold">View Report</h3>
+                            <h5 class="card-title text-center font-weight-bold">View Report</h5>
                             <div class="d-flex justify-content-center">
-                                <!-- View Button: Opens the file in a new tab -->
-                                <a href="{{ asset($donor->donor_report_file) }}" target="_blank"
-                                    class="btn btn-warning me-2">View Report</a>
-
-                                <!-- Download Button: Downloads the file directly -->
-                                <a href="{{ asset($donor->donor_report_file) }}" download
-                                    class="btn btn-success">Download Report</a>
-
-                                <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
-                                    data-bs-target="#alertModal">
-                                    Show Form
+                                @if($donor->donor_report_file)
+                                    <!-- View Button: Opens the file in a new tab -->
+                                    <a href="{{ asset($donor->donor_report_file) }}" target="_blank" class="btn btn-warning btn-sm me-2">View Report</a>
+                
+                                    <!-- Download Button: Downloads the file directly -->
+                                    <a href="{{ asset($donor->donor_report_file) }}" download class="btn btn-success btn-sm">Download Report</a>
+                                @endif
+                
+                                <button type="button" class="btn btn-info btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#alertModal">
+                                    Update Profile
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
 
         <!-- Students Section -->
         <div class="container">
-            <h2 class="my-4 text-center bg-primary text-light p-2">Students Sponsored</h2>
+            <h5 class="my-4 text-center bg-primary text-light">Students Sponsored</h5>
             @if ($donor->students->isEmpty())
                 <div class="alert alert-info">No students found for this donor.</div>
             @else
@@ -132,40 +131,40 @@
 
                                         <!-- Student Info -->
                                         <div class="col-md-8">
-                                            <h6 class="card-text"><strong>Registration No:</strong>
-                                                {{ $student->qalam_id }}</h6>
-                                            <h6 class="card-text"><strong>Student Name:</strong>
-                                                {{ $student->name_of_student }}</h6>
-                                            <h6 class="card-text"><strong>Institution:</strong>
-                                                {{ $student->institutions }}</h6>
-                                            <h6 class="card-text"><strong>Province:</strong> {{ $student->city }}</h6>
-                                            <h6 class="card-text"><strong>Father/Guardian Profession:</strong>
-                                                {{ $student->father_profession }}</h6>
-                                            <h6 class="card-text"><strong>Intake Year:</strong>
-                                                {{ $student->year_of_admission }}</h6>
-                                            <h6 class="card-text">
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Registration No:</strong> {{ $student->qalam_id }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Student Name:</strong> {{ $student->name_of_student }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Institution:</strong> {{ $student->institutions }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Province:</strong> {{ $student->city }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Father/Guardian Profession:</strong> {{ $student->father_profession }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;"><strong>Intake Year:</strong> {{ $student->year_of_admission }}</h6>
+                                            <h6 class="card-text" style="font-size: 14px;">
                                                 <strong>Remarks Status:</strong>
-                                                <span
-                                                    style="{{ $student->remarks_status == 'Qualified' ? 'color: red;' : 'color: black;' }}">
+                                                <span style="{{ $student->remarks_status == 'Qualified' ? 'color: green;' : 'color: black;' }}">
                                                     {{ $student->remarks_status }}
                                                 </span>
                                             </h6>
                                         </div>
+                                        
                                     </div>
 
                                     <div class="row mt-3">
-                                        <!-- CGPA Bar Chart -->
+
                                         <div class="col-md-5 mb-3">
+                                            <h6 class="text-center">Accadmeic Groth</h6>
                                             {{-- <canvas id="cgpaChart{{ $student->id }}"></canvas> --}}
                                             <canvas id="cgpaChart{{ $student->id }}"
                                                 style="width: 100%; height: 250px; border: 2px solid rgb(2, 121, 233)"></canvas>
                                         </div>
                                         <div class="col-md-6">
+                                            @if ($loop->first)
                                             <h4 class="text-dark mt-5 text-center">Thank You Note</h4>
-                                            <p class="text-dark">
-                                               {{ $student->note_of_thanks }}"
-                                            </p>
+                                          
+                                                <p class="text-dark">
+                                                   {{ $student->note_of_thanks }}
+                                                </p>
+                                            @endif
                                         </div>
+                                        
 
                                     </div>
 
@@ -179,12 +178,10 @@
     </div>
 
     <div class="container">
-        <h2 class="my-4 text-center bg-primary text-light p-1">Transaction History</h2>
-        @if ($donor->transactions->isEmpty())
-            <div class="alert alert-info">No transaction history found for this donor.</div>
-        @else
+        @if (!$donor->transactions->isEmpty())
+            <h5 class="my-4 text-center bg-primary text-light">Transaction History</h5>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped table-sm">
                     <thead class="table-light">
                         <tr>
                             <th scope="col">Transaction Date</th>
@@ -195,8 +192,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($donor->transactions as $transaction)
-                            <tr>
+                        @foreach ($donor->transactions as $index => $transaction)
+                            <tr class="{{ $index >= 5 ? 'd-none' : '' }} transaction-row">
                                 <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d M Y') }}</td>
                                 <td>{{ $transaction->mode_of_transaction }}</td>
                                 <td>{{ number_format($transaction->amount_received, 2) }}</td>
@@ -206,37 +203,57 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <button id="toggleButton" class="btn btn-primary" onclick="toggleRows()">Show All</button>
+                </div>
             </div>
+        @else
+            <div class="alert alert-info">No transaction history found for this donor.</div>
         @endif
     </div>
+    
+    <script>
+        function toggleRows() {
+            const rows = document.querySelectorAll('.transaction-row');
+            const button = document.getElementById('toggleButton');
+    
+            rows.forEach((row, index) => {
+                if (index >= 5) {
+                    row.classList.toggle('d-none');
+                }
+            });
+    
+            button.textContent = button.textContent === 'Show All' ? 'Show Less' : 'Show All';
+        }
+    </script>
+     
+    
 
 
     <!-- Add this new section after the "Students Sponsored" section -->
     <div class="container mt-5 p-3">
-        <h2 class="my-4 text-center bg-primary text-light p-1" style="font-size: 2rem;">Note of Thanks</h2>
+        <h5 class="my-4 text-center bg-primary text-light">Heartfelt Thanks for Your Generous Support of Our Scholars</h5>
         <div class="row">
 
-            <div class="col-md-12 position-relative mt-5 mb-5">
+            <div class="col-md-12 position-relative mt-3 mb-5">
                 <p class="mt-3">
-                    Greeting Donors!
+                    Greeting!</p>
+                <p class="" style="font-size: 14px;">
+                    On behalf of our students and community, I want to extend my sincerest gratitude for your generous support. Your donation has a profound impact on the lives of our scholars, helping to alleviate financial burdens and open doors to opportunities that might otherwise remain out of reach.
                 </p>
-                <p class="">
-                    I want to express my heartfelt gratitude for your generosity in supporting our scholars. Your
-                    donation has a profound impact, alleviating financial burdens and transforming lives.
-                    Your investment in education creates a ripple effect of change, empowering students to achieve their
-                    dreams and uplift their communities. Your contribution is a legacy that will shape the futures of
-                    deserving students.
+                <p class="" style="font-size: 14px;">
+                    Your investment in education creates a ripple effect of change, empowering our students to pursue their dreams and uplift their communities. This contribution is a lasting legacy, shaping the futures of deserving individuals who are deeply grateful for your support. Together, we are building a brighter, more equitable nation through transformative education.
                 </p>
-                <p class="">
-                    Thank you for helping us build a better nation through transformative education
-                    Together, we are truly making a meaningful difference in the lives of our students.
+                <p class="" style="font-size: 14px;">
+                    Thank you once again for making a meaningful difference in the lives of our students and for believing in the power of education to change lives. We are honored to have you as a partner in this important mission.
                 </p>
                 {{-- <p class="">
                     Together, we are truly making a meaningful difference in the lives of our students.
                 </p> --}}
 
                 <div class="position-absolute" style="bottom: auto; right: 10px;">
-                    <h4 class="font-weight-bold mb-0">Arooba Gillani</h4>
+                    <h6 class="font-weight-bold mb-0">With warmest regards and heartfelt thanks,</h6>
+                    <h6 class="font-weight-bold mb-0">Arooba Gillani</h6>
                     <small class="text-muted">Director Advancement and</small><br>
                     <small class="text-muted">Head of Global Linkages
                         NUST</small>
@@ -255,6 +272,8 @@
         </a>
     </div>
 
+    <br><br>
+    <br><br>
     <br><br>
 
     <!-- Button to Trigger Alert Modal -->

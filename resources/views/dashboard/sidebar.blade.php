@@ -70,8 +70,8 @@
     <!-- Nav Item - Add New Students -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('annual_zakat_trasnaction_history') }}">
-            <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
-            <span>Annual and Zakat Traction Report</span>
+            {{-- <i class="fas fa-user-plus"></i> <!-- Add New Students Icon --> --}}
+            <span>Annual/Endoement/Zakat Traction Report</span>
         </a>
     </li>
 @endif

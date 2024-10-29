@@ -78,6 +78,7 @@
                                     <option value="" disabled selected>Select Fund Type</option>
                                     <option value="annual_fund">Annual Fund</option>
                                     <option value="zakat_fund">Zakat Fund</option>
+                                    <option value="Endonment_fund">Endonment Fund</option>
                                     <!-- Add more options as needed -->
                                 </select>
                             </div>
