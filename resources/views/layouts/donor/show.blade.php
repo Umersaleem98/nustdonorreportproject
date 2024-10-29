@@ -150,7 +150,7 @@
                                     <div class="row mt-3">
 
                                         <div class="col-md-5 mb-3">
-                                            <h6 class="text-center">Accadmeic Groth</h6>
+                                            <h6 class="text-center">Academic Growth</h6>
                                             {{-- <canvas id="cgpaChart{{ $student->id }}"></canvas> --}}
                                             <canvas id="cgpaChart{{ $student->id }}"
                                                 style="width: 100%; height: 250px; border: 2px solid rgb(2, 121, 233)"></canvas>
@@ -208,7 +208,7 @@
                 </div>
             </div>
         @else
-            <div class="alert alert-info">No transaction history found for this donor.</div>
+            <div class="alert alert-info">No transaction history becouse its Annual or Zakat Fund .</div>
         @endif
     </div>
     
