@@ -43,7 +43,7 @@
 </style>
 
 <!-- Bootstrap Carousel -->
-<div id="donorCarousel" class="carousel slide my-5" data-bs-ride="carousel">
+<div id="donorCarousel" class="carousel slide mt-2" data-bs-ride="carousel">
     <!-- Carousel Indicators -->
     <ol class="carousel-indicators">
         <li data-bs-target="#donorCarousel" data-bs-slide-to="0" class="active"></li>

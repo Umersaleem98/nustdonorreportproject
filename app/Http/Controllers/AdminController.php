@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Donor;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,12 +22,15 @@ class AdminController extends Controller
        $studentsCount = $students->count();  // Count total students
    
        // Count students where student_status is 'qualified'
-       $qualifiedStudentsCount = Student::where('remarks_status', 'qualified')->count();
+       $qualifiedStudentsCount = Student::where('remarks_status', 'graduated')->count();
    
        $donors = Donor::all();  // Retrieve all donors
        $donorCount = $donors->count();  // Count total donors
    
-       return view('dashboard', compact('donors', 'donorCount', 'students', 'studentsCount', 'qualifiedStudentsCount'));
+
+       $transection = TransactionHistory::all();
+       $transectionCount =$transection->count();
+       return view('dashboard', compact('donors', 'donorCount', 'students', 'studentsCount', 'qualifiedStudentsCount', 'transection','transectionCount'));
    }
    
     

@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        response()->macro('forbidden', function () {
+            return response()->view('errors.403', [], 403);
+        });
     }
 }

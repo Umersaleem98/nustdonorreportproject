@@ -14,7 +14,7 @@
     @include('layouts.slider')
 
     <!-- Centered Search Form -->
-    <div class="container center-search-form">
+    <div class="container center-search-form mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <form action="{{ url('/') }}" method="GET" class="mb-4 text-center">

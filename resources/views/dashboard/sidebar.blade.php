@@ -1,3 +1,34 @@
+<style>
+    /* Truncate text with ellipsis if it overflows */
+/* Allow text to wrap to the next line within dropdown items */
+.dropdown-menu .dropdown-item {
+    white-space: normal;
+    overflow: visible;
+    max-width: 250px;
+    word-wrap: break-word;
+}
+
+/* Optional: Adjust dropdown width */
+.dropdown-menu {
+    min-width: 270px;
+}
+
+
+/* Adjust the dropdown position to align with the sidebar */
+.nav-item.dropdown .dropdown-menu {
+    position: absolute;
+    left: 100%;           /* Position it to the right of the sidebar */
+    top: 0;
+    min-width: 220px;     /* Set a width that fits within the sidebar */
+    max-width: 250px;
+    white-space: normal;  /* Allow text to wrap */
+    overflow-wrap: break-word; /* Break long words if necessary */
+    z-index: 1000;        /* Ensure it stays above other content */
+}
+
+
+</style>
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -31,8 +62,9 @@
             <span>Students</span>
         </a>
     </li>
-    
-    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+
+    @if (Auth::user()->usertype != 'user')
+        <!-- Only show if usertype is not 'user' -->
         <!-- Nav Item - Add New Students -->
         <li class="nav-item active">
             <a class="nav-link" href="{{ url('add_students') }}">
@@ -40,8 +72,6 @@
                 <span>Add New Students</span>
             </a>
         </li>
-    
-    
     @endif
 
     <!-- Nav Item - Donor List -->
@@ -53,7 +83,8 @@
     </li>
 
 
-    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
+    @if (Auth::user()->usertype != 'user')
+        <!-- Only show if usertype is not 'user' -->
         <!-- Nav Item - Add New Students -->
         <!-- Nav Item - Add Donor -->
         <li class="nav-item active">
@@ -66,22 +97,25 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
-    <!-- Nav Item - Add New Students -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('annual_zakat_trasnaction_history') }}">
-            {{-- <i class="fas fa-user-plus"></i> <!-- Add New Students Icon --> --}}
-            <span>Annual/Endoement/Zakat Traction Report</span>
+    @if (Auth::user()->usertype != 'user')
+    <!-- Dropdown Menu for Transaction Reports -->
+    <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="transactionDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span>Transaction Reports</span>
         </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="transactionDropdown">
+            <a class="dropdown-item" href="{{ url('annual_zakat_trasnaction_history') }}">
+                Annual/Endowment/Zakat Transaction Report
+            </a>
+            <a class="dropdown-item" href="{{ url('add_trasnaction_report') }}">
+                Add Transaction Report
+            </a>
+        </div>
     </li>
+    
 @endif
-    @if(Auth::user()->usertype != 'user') <!-- Only show if usertype is not 'user' -->
-    <!-- Nav Item - Add New Students -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('add_trasnaction_report') }}">
-            <i class="fas fa-user-plus"></i> <!-- Add New Students Icon -->
-            <span>Add Traction Report</span>
-        </a>
-    </li>
-@endif
+
+
+
 </ul>
